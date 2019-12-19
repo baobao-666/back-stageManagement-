@@ -1,0 +1,19 @@
+// 考试试卷管理
+
+import request from '@/utils/request'
+
+// 创建试卷接口
+ export  const  addExaminationPaperManagement=(params)=>request.post('/exam/exam',{subject_id:params.subject_id,exam_id:params.exam_id,	title:params.title,number:params.number,start_time:params.start_time,end_time:params.end_time})
+ 
+//  更新试卷接口
+ export  const  updateExaminationPaperManagement=(params)=>request.put('/exam/exam/w5tcy-g2dts',{subject_id:params.subject_id,exam_id:params.exam_id,	title:params.title,number:params.number,start_time:params.start_time,end_time:params.end_time})
+ 
+//  获取试卷列表接口
+ export  const  getExaminationPaperManagement=(params)=>request.get('/exam/exam/w5tcy-g2dts',{params})
+ 
+//  获取试卷详情（教师端）接口
+ export  const  getExaminationPaperManagementTeacher=()=>request.get('/exam/exam/w5tcy-g2dts')
+
+//  删除接口
+ export  const  deleteExaminationPaperManagementTeacher=()=>request.delete('/exam/exam/w5tcy-g2dts')
+
