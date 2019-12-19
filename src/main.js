@@ -19,7 +19,8 @@ import './permission' // permission control
 import './utils/error-log' // error log
 
 import * as filters from './filters' // global filters
-
+import ElementUI from 'element-ui'
+import 'element-ui/lib/theme-chalk/index.css'
 /**
  * If you don't want to use mock-server
  * you want to use MockJs for mock api
@@ -42,7 +43,7 @@ Vue.use(Element, {
 Object.keys(filters).forEach(key => {
   Vue.filter(key, filters[key])
 })
-
+Vue.use(ElementUI)
 Vue.config.productionTip = false
 
 new Vue({

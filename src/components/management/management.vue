@@ -1,6 +1,15 @@
 <template>
     <div>
-
+<p>ssss</p>
+<p>ssss</p>
+<p>ssss</p>
+<p>ssss</p>
+<p>ssss</p>
+<p>ssss</p>
+<p>ssss</p>
+<p>ssss</p>
+<p>ssss</p>
+<p>ssss</p>
     </div>
 </template>
 <script>
@@ -30,6 +39,6 @@ export default {
     }
 }
 </script>
-<style scoped lang="scss">
+<style scoped lang="">
 
 </style>

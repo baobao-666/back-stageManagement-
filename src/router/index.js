@@ -96,18 +96,7 @@ export const constantRoutes = [
       }
     ]
   },
-  {
-    path: '/exs',
-    component: Layout,
-    children: [
-      {
-        path: 'index',
-        component: () => import('@/views/exs/index'),
-        name: 'Exs',
-        meta: { title: 'exs', icon: 'dashboard' }
-      }
-    ]
-  },
+ 
   {
     path: '/guide',
     component: Layout,
@@ -235,6 +224,31 @@ export const asyncRoutes = [
       }
     ]
   },
+  
+  {
+    path: '/exs',
+    component: Layout,
+    // redirect: 'noRedirect',
+    // name: 'ErrorPages',
+    meta: {
+      title: '用户管理',
+      icon: 'edit'
+    },
+    children: [
+      {
+        path: 'add',
+        component: () => import('@/views/exs/add'),
+        name: 'Add',
+        meta: { title: '添加用户', noCache: true }
+      },
+      {
+        path: 'exhibition',
+        component: () => import('@/views/exs/exhibition'),
+        name: 'Exhibition',
+        meta: { title: '用户管理', noCache: true }
+      }
+    ]
+  },
 
   {
     path: '/tab',
@@ -273,6 +287,7 @@ export const asyncRoutes = [
       }
     ]
   },
+  
 
   {
     path: '/error-log',
