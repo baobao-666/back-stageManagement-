@@ -106,7 +106,7 @@ export default {
     background: #f0f9eb;
     }
     .read{
-        color: rgb(16, 95, 214);
+        color: rgb(27, 77, 216);
     }
 </style>
     
