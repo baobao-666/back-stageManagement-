@@ -5,7 +5,7 @@ import { getToken } from '@/utils/auth'
 
 // create an axios instance
 const service = axios.create({
-  baseURL: 'http://169.254.126.222:7002', // url = base url + request url
+  baseURL: 'http://169.254.124.14:7002', // url = base url + request url
   // withCredentials: true, // send cookies when cross-domain requests
   timeout: 5000 // request timeout
 })
@@ -80,6 +80,17 @@ service.interceptors.response.use(
     })
     return Promise.reject(error)
   }
+
+
+
+
+
+
+
+
+
+
+
 )
 
 export default service

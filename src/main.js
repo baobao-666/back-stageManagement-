@@ -26,7 +26,8 @@ import './utils/error-log' // error log
 
 // 自定义过滤器
 import * as filters from './filters' // global filters
-
+import ElementUI from 'element-ui'
+import 'element-ui/lib/theme-chalk/index.css'
 /**
  * If you don't want to use mock-server
  * you want to use MockJs for mock api
