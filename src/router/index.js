@@ -93,6 +93,7 @@ export const constantRoutes = [
         name: 'Dashboard',
         meta: { title: 'dashboard', icon: 'dashboard', affix: true }
       }
+      
     ]
   },
   {
@@ -107,6 +108,7 @@ export const constantRoutes = [
       }
     ]
   },
+ 
   {
     path: '/guide',
     component: Layout,
@@ -133,7 +135,8 @@ export const constantRoutes = [
         meta: { title: 'profile', icon: 'user', noCache: true }
       }
     ]
-  }
+  },
+ 
 ]
 
 /**
@@ -155,7 +158,7 @@ export const asyncRoutes = [
     children: [
       {
         path: 'page',
-        component: () => import('@/views/permission/page'),
+        component: () =>import('@/views/permission/page'),
         name: 'PagePermission',
         meta: {
           title: 'pagePermission',
@@ -239,13 +242,13 @@ export const asyncRoutes = [
         path: 'create',
         component: () => import('@/views/example/create'),
         name: 'CreateArticle',
-        meta: { title: 'createArticle', icon: 'edit' }
+        meta: { title: 'createArticle', icon: 'edit'}
       },
       {
         path: 'edit/:id(\\d+)',
         component: () => import('@/views/example/edit'),
         name: 'EditArticle',
-        meta: { title: 'editArticle', noCache: true, activeMenu: '/example/list' },
+        meta: { title: 'editArticle', noCache: true, activeMenu: '/example/list'},
         hidden: true
       },
       {
@@ -253,6 +256,31 @@ export const asyncRoutes = [
         component: () => import('@/views/example/list'),
         name: 'ArticleList',
         meta: { title: 'articleList', icon: 'list' }
+      }
+    ]
+  },
+  
+  {
+    path: '/exs',
+    component: Layout,
+    // redirect: 'noRedirect',
+    // name: 'ErrorPages',
+    meta: {
+      title: '用户管理',
+      icon: 'edit'
+    },
+    children: [
+      {
+        path: 'add',
+        component: () => import('@/views/exs/add'),
+        name: 'Add',
+        meta: { title: '添加用户', noCache: true }
+      },
+      {
+        path: 'exhibition',
+        component: () => import('@/views/exs/exhibition'),
+        name: 'Exhibition',
+        meta: { title: '用户管理', noCache: true }
       }
     ]
   },
@@ -294,6 +322,7 @@ export const asyncRoutes = [
       }
     ]
   },
+  
 
   {
     path: '/error-log',
