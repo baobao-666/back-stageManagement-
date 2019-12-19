@@ -172,6 +172,29 @@ export const asyncRoutes = [
   },
 
   {
+    path: '/examination',
+    component: Layout,
+    redirect: '/examination/backlog',
+    alwaysShow: true, // will always show the root menu
+    name: 'Examination',
+    meta: {
+      title: '阅卷管理',
+      icon: 'edit',
+      roles: ['admin', 'editor'] // you can set roles in root nav
+    },
+    children: [
+      {
+        path: 'backlog',
+        component: () => import('@/views/examination/backlog'),
+        name: 'Examination',
+        meta: {
+          title: '待批班级',
+          roles: ['admin'] // or you can only set roles in sub nav
+        }
+      }
+    ]
+  },
+  {
     path: '/icon',
     component: Layout,
     children: [
