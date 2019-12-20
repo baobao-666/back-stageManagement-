@@ -3,9 +3,9 @@
 <el-container>
   <el-header>添加用户</el-header>
   <el-main>
-<div class="count">
+
 <Management/>
-</div>
+
 
   </el-main>
 </el-container>
@@ -55,11 +55,7 @@ export default {
     display: flex;
     flex-direction: column;
     align-items: center;
-    .count{
-        width: 100%;
-border:1px solid #ccc;
-
-    }
+    
    
   }
   
