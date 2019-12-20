@@ -8,26 +8,26 @@
                 <!-- 添加按钮 -->
 
                 <!-- 表单弹层 -->
-                 <FromMark v-if="FromFlag" ></FromMark>
+                 <!-- <FromMark v-if="true" ></FromMark> -->
                 <!-- 表单弹层 -->
 
 
                 <!-- 表格 -->
                 <el-table
-                 :data="tableData"
+                 :data="classRoomList"
                  style="width: 100%">
                  <el-table-column
-                   prop="date"
+                   prop="grade_name"
                    label="班级名"
                    width="180">
                  </el-table-column>
                  <el-table-column
-                   prop="name"
+                   prop="subject_text"
                    label="课程名"
                    width="180">
                  </el-table-column>
                  <el-table-column
-                   prop="address"
+                   prop="room_text"
                    label="教室号">
                  </el-table-column>
                  <!-- 操作 -->
@@ -62,39 +62,35 @@ export default {
       },
       data() {
         return {
-          tableData: [{
-            date: '2016-05-02',
-            name: '王小虎',
-            address: '上海市普陀区金沙江路 1518 弄'
-          }, {
-            date: '2016-05-04',
-            name: '王小虎',
-            address: '上海市普陀区金沙江路 1517 弄'
-          }, {
-            date: '2016-05-01',
-            name: '王小虎',
-            address: '上海市普陀区金沙江路 1519 弄'
-          }, {
-            date: '2016-05-03',
-            name: '王小虎',
-            address: '上海市普陀区金沙江路 1516 弄'
-          }],
           FromFlag:false
         }
       },
+      computed:{
+       ...mapState({
+         classRoomList: state=>state.StudentClassClassroomManagement.classRoomList
+       })
+      },
       methods:{
+        ...mapActions({
+          getIfClassRoom:"StudentClassClassroomManagement/getIfClassRoom",
+          deleteClassRoom:"StudentClassClassroomManagement/deleteClassRoom",
+        }),
       //编辑事件
       handleEdit(index, row) {
         console.log(index, row);
       },
      //删除事件
       handleDelete(index, row) {
-        console.log(index, row);
+        this.deleteClassRoom(row.grade_id)
       },
      //添加弹出蒙层
       open() {
         this.FromFlag=true
       }
+      },
+      created(){
+        //请求全部分配教室的数据
+        this.getIfClassRoom()
       }
 }
 </script>
@@ -104,5 +100,8 @@ export default {
 }
 .el-button{
     margin-bottom: 20px;
+}
+.class-contniner{
+  padding: 24px
 }
 </style>
