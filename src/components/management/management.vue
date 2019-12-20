@@ -186,6 +186,7 @@
   </div>
 </template>
 <script>
+import {mapActions,mapState} from 'vuex'
 export default {
   props: {},
   components: {},
@@ -210,14 +211,29 @@ export default {
       value: ""
     };
   },
-  computed: {},
+  computed: {
+      ...mapState({
+          user:state=>state.user
+      })
+  },
   methods: {
     tab(index) {
       this.cur = index;
-    }
+    },
+    ...mapActions({
+        addUserList:'userPermission/getuser'
+    })
   },
-  created() {},
-  mounted() {}
+  created(){
+      let obj={
+      user_name:'zhangdongming',
+      user_pwd:'Zhangdongming123!',
+    //   identity_id:'浏览者',
+      }
+      this.addUserList(obj)
+
+  },
+ 
 };
 </script>
 <style scoped lang="scss">
