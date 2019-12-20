@@ -17,7 +17,7 @@
             </el-select>
             <!-- 课程数据 -->
             <p style="margin-left:15px">请选择课程类型:</p>
-            <el-select v-model="form.course" style="margin-left:15px">
+            <el-select v-model="form.subject" style="margin-left:15px">
                 <el-option v-for="(item,index) in courseList" :key="index" :label="item.subject_text" :value="item.subject_id">
                 </el-option>
             </el-select>
@@ -35,7 +35,7 @@
             </el-input>
 
             <p style="margin-left:15px">
-                <el-button class="btn">提交</el-button>
+                <el-button class="btn" @click="submit">提交</el-button>
             </p>
             
         </el-form>
@@ -55,9 +55,9 @@ export default {
             form:{
                 name:'',        //题干
                 desc: '',       // 主题
-                examId:'',        // 考试类型
-                courseId:'',      //课程类型 
-                topicId:'',       //题目类型 
+                exam:'',        // 考试类型
+                subject:'',      //课程类型 
+                topic:'',       //题目类型 
                 answer:'',      // 答案信息
                 
             }
@@ -71,6 +71,8 @@ export default {
             courseList:state=>state.TestQuestionManagement.courseList,
             // 题目类型的数据
             topicList:state=>state.TestQuestionManagement.topicList,
+            // 当前用户信息
+            userAddress:state=>state.TestQuestionManagement.userAddress,
         })
     },
     methods:{
@@ -83,7 +85,29 @@ export default {
             getTopicQuestionsType:'TestQuestionManagement/getTopicQuestionsType',
             //添加试题接口
             addTestQuestions:'TestQuestionManagement/addTestQuestions',
-        })
+            // 当前用户信息接口
+            getUserAddress:'TestQuestionManagement/getUserAddress'
+        }),
+        submit(){
+            // 要添加的类型数据  所需试题信息 
+        let questions_stem= this.name,         //题干
+            title=this.desc,                    // 主题
+            exam_id=this.exam,                  // 考试类型
+            subject_id=this.subject,            //课程类型 
+            questions_type_id=this.topic,       //题目类型 
+            questions_answer=this.answer,       // 答案信息
+            user_id = this.userAddress.user_id  // 用户Id
+            // 添加试题接口
+            this.addTestQuestions({
+                questions_type_id,
+                questions_stem,
+                subject_id,
+                exam_id,
+                user_id,
+                questions_answer,
+                title
+            })
+        }
     },
     created(){
         console.log('123456',this.exam)
@@ -94,15 +118,9 @@ export default {
         // 调用题目类型接口
         this.getTopicQuestionsType()
 
-        // 要添加的类型数据
-        let  name= this.name,    //题干
-            desc=this.desc,   // 主题
-            exam=this.examId,    // 考试类型
-            course=this.Id,   //课程类型 
-            topic=this.topicId,   //题目类型 
-            answer=this.answer   // 答案信息
-        // 添加试题接口
-        // this.addTestQuestions({})
+        // 调用当前用户信息
+        this.getUserAddress()
+        
     },
     mounted(){
 
