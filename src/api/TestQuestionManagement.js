@@ -24,7 +24,7 @@ export const deleteOneTestQuestionsType=(params)=>request.post('/exam/delQuestio
 export const addTestQuestionsType = (params) => request.get('/exam/insertQuestionsType',{params})
 
 // 获取所有的试题类型
-export const addTestQuestionsType = () => request.get('/exam/getQuestionsType')
+export const getTopicQuestionsType = () => request.get('/exam/getQuestionsType')
 
 // 按条件获取试题
-export const getTestQuestionsType = (params) => request.get('/exam/questions/condition',{questions_id:params.questions_id,questions_type_id:params.questions_type_id,subject_id:params.subject_id,exam_id:params.exam_id})
+// export const getTestQuestionsType = (params) => request.get('/exam/questions/condition',{questions_id:params.questions_id,questions_type_id:params.questions_type_id,subject_id:params.subject_id,exam_id:params.exam_id})

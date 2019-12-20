@@ -31,7 +31,7 @@
             size="mini"
             type="danger"
             class="read"
-            @click="handleLook(scope.$index, scope.row)">批卷</span>
+            @click="handleLook(scope.$index, scope.row)"><a href="#">批卷</a></span>
         </template>
         </el-table-column>
     </el-table>
@@ -39,6 +39,7 @@
 </template>
 
 <script>
+import {mapActions,mapState} from 'vuex'
 export default {
   props:{
 
@@ -72,7 +73,9 @@ export default {
         }
     },
     computed:{
-
+        // ...mapState({
+        //     examList:state=>state.Emm.examList
+        // })
     },
     methods:{
         tableRowClassName({row, rowIndex}) {
@@ -85,10 +88,14 @@ export default {
       },
       handleLook(index,row){
           console.log(132)
-      }
+      },
+      ...mapActions({
+          // getMarking:'ExaminationMarkingManagement/getMarking'
+      })
     },
     created(){
-        
+        // this.getMarking();
+        // console.log(this.$store)
     },
     mounted(){
 

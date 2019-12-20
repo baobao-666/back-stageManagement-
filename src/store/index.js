@@ -2,20 +2,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import getters from './getters'
 
-// 用户权限接口文档
-import users from './modules/userPermission'
-
-// 考试阅卷管理
-import Emm  from './modules/ExaminationMarkingManagement'
-
-// 考试试卷管理
-import Ep from './modules/ExaminationPaperManagement'
-
-// 学生、班级、教室管理
-import Sccm  from './modules/StudentClassClassroomManagement'
-
-// 试题管理接口文档
-import Tm  from './modules/TestQuestionManagement'
+// import  creareLogger from 'vuex/dist/logger'
 
 Vue.use(Vuex)
 
@@ -33,13 +20,10 @@ const modules = modulesFiles.keys().reduce((modules, modulePath) => {
 }, {})
 
 const store = new Vuex.Store({
+  
   modules,
   getters,
-  users,
-  Emm,
-  Ep,
-  Sccm,
-  Tm
+  // plugins:[creareLogger()]
 })
 
 export default store

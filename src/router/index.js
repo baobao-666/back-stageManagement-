@@ -156,7 +156,7 @@ export const constantRoutes = [
       }
     ]
   },
- 
+
 ]
 
 /**
@@ -205,7 +205,6 @@ export const asyncRoutes = [
       }
     ]
   },
-
   {
     path: '/examination',
     component: Layout,
@@ -224,11 +223,53 @@ export const asyncRoutes = [
         name: 'Examination',
         meta: {
           title: '待批班级',
-          roles: ['admin'] // or you can only set roles in sub nav
+          // roles: ['admin'] // or you can only set roles in sub nav
         }
       }
     ]
   },
+  {
+    path: '/test-questions',
+    component: Layout,
+    redirect: '/test-questions/add',
+    alwaysShow: true, // will always show the root menu
+    name: 'test-questions',
+    meta: {
+      title: '试题管理',
+      icon: 'edit',
+      // roles: ['admin', 'editor'] // you can set roles in root nav
+    },
+    children: [
+      {
+        path: 'add',
+        component: () => import('@/views/test-questions/add'),
+        name: 'Test-questions',
+        meta: {
+          title: '添加试题',
+          // roles: ['admin'] // or you can only set roles in sub nav
+        }
+      },
+      {
+        path: 'classify',
+        component: () => import('@/views/test-questions/classify'),
+        name: 'Test-questions',
+        meta: {
+          title: '试题分类',
+          // roles: ['admin'] // or you can only set roles in sub nav
+        }
+      },
+      {
+        path: 'examine',
+        component: () => import('@/views/test-questions/examine'),
+        name: 'Test-questions',
+        meta: {
+          title: '查看试题',
+          // roles: ['admin'] // or you can only set roles in sub nav
+        }
+      }
+    ]
+  },
+  
   {
     path: '/icon',
     component: Layout,
