@@ -13,7 +13,7 @@ export const  showUserMess =(params)=>request.get('/user/identity',{params})
 export const  showUserMessAndIP =()=>request.get('/user/identity_api_authority_relation')
 
 // 添加用户
-export const  addUserList =(params)=>request.post('/user',{user_name:params.user_name,user_pwd:params.user_pwd,identity_id:params.identity_id})
+// export const  addUserList =(params)=>request.post('/user',{user_name:params.user_name,user_pwd:params.user_pwd,identity_id:params.identity_id})
 
 // 添加试图权限
 export const  addViewId =(params)=> request.get('/user/authorityView/edit',{params})

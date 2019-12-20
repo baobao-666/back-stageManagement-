@@ -22,3 +22,11 @@ export function logout() {
     method: 'post'
   })
 }
+export function getuser(data){
+  console.log(data,"++++++++")
+  return request({
+    url:'/user',
+    method:'post',
+    data
+  })
+}

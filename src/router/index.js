@@ -356,7 +356,7 @@ export const asyncRoutes = [
         path: 'exhibition',
         component: () => import('@/views/exs/exhibition'),
         name: 'Exhibition',
-        meta: { title: '用户管理', noCache: true }
+        meta: { title: '用户展示', noCache: true }
       }
     ]
   },
