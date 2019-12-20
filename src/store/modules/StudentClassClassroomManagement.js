@@ -1,6 +1,8 @@
 // 学生、班级、教室管理
-const state = {
 
+
+const state = {
+    
 }
 
 const mutations = {
@@ -8,7 +10,6 @@ const mutations = {
 }
 
 const actions = {
-
 }
 
 export default {

@@ -39,15 +39,30 @@ import nestedRouter from './modules/nested'
  * all roles can be accessed
  */
 export const constantRoutes = [
+  // 班级管理路由
   {
-    path:"/home",
+    path:"/classroom",
     component: Layout,
+    name: 'classRoom',
+    meta: { title: '班级管理', icon: 'documentation', affix: true },
     children:[
       {
-        path: 'home',
-        component: () => import('@/views/home/index'),
-        name: 'home',
-        meta: { title: 'home', icon: 'documentation', affix: true }
+        path:"/classroom/classmanagement",
+        component:()=>import('@/views/classRoom/classManagement/index'),
+        name:"classmanagement",
+        meta:{title:"班级管理"}
+      },
+      {
+        path:"/classroom/Classroommanagement",
+        component:()=>import('@/views/classRoom/ClassroomManagement/index'),
+        name:'Classroommanagement',
+        meta:{title:"教室管理"}
+      },
+      {
+        path:"/classroom/studentManagement",
+        component:()=>import('@/views/classRoom/studentManagement/index'),
+        name:'studentManagement',
+        meta:{title:"学生管理"}
       }
     ]
   },
