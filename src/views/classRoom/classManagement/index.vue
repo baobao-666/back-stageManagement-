@@ -8,7 +8,7 @@
                 <!-- 添加按钮 -->
 
                 <!-- 表单弹层 -->
-                 <!-- <FromMark v-if="true" ></FromMark> -->
+                 <FromMark v-if="FromFlag" ></FromMark>
                 <!-- 表单弹层 -->
 
 
