@@ -1,10 +1,11 @@
 // 学生、班级、教室管理
 
-import { getIfClassRoom,deleteClassRoom,getAllClassRoom } from '@/api/StudentClassClassroomManagement'
+import { getIfClassRoom,deleteClassRoom,getAllClassRoom,getsubject } from '@/api/StudentClassClassroomManagement'
 
 const state = {
     classRoomList:[], //全部班级数据
-    AllClassRoom:[]
+    AllClassRoom:[] ,//全部教师数据
+    Allsubject:[],//全部科目
 }
 
 const mutations = {
@@ -13,7 +14,11 @@ const mutations = {
         state.classRoomList=palody
     },
     setAllClassRoom(state,palody){
+      // 全部教室
       state.AllClassRoom=palody
+    },
+    setAllsubject(state,palody){
+      state.Allsubject=palody
     }
 }
 
@@ -31,11 +36,17 @@ const actions = {
     console.log(res);
   },
   async getAllClassRoom({commit},palody){
-    // 删除班级
+    // 获取全部班级
     let res = await getAllClassRoom()
     if(res.code===1){
       commit("setAllClassRoom",res.data)
     }
+  },
+  async getsubject({commit}){
+      let res = await getsubject()
+      if(res.code===1){
+        commit("setAllsubject",res.data)
+      }    
   }
 }
 

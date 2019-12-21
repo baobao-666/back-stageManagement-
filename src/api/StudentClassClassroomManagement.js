@@ -49,6 +49,7 @@ export const updateStudentMess=(params)=>request.put('/manger/student/edit',{stu
 // 添加学生接口
 export const addStudentMess=(params)=>request.post('/manger/student',{student_id:params.student_id,student_name:params.student_name,student_pwd:params.student_pwd,grade_id:params.grade_id}) 
 
-
+//获取全部科目
+export const getsubject=()=>request.get('/exam/subject') 
 
 

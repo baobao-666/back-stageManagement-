@@ -8,7 +8,7 @@
                 <!-- 添加按钮 -->
 
                 <!-- 表单弹层 -->
-                 <FromMark v-if="FromFlag" ></FromMark>
+                 <FromMark  v-if="FromFlag" :FromFlag.sync="FromFlag" ></FromMark>
                 <!-- 表单弹层 -->
 
 
@@ -74,6 +74,8 @@ export default {
         ...mapActions({
           getIfClassRoom:"StudentClassClassroomManagement/getIfClassRoom",
           deleteClassRoom:"StudentClassClassroomManagement/deleteClassRoom",
+          getsubject:"StudentClassClassroomManagement/getsubject", 
+          getAllClassRoom:"StudentClassClassroomManagement/getAllClassRoom"      
         }),
       //编辑事件
       handleEdit(index, row) {
@@ -91,6 +93,10 @@ export default {
       created(){
         //请求全部分配教室的数据
         this.getIfClassRoom()
+        // 获取全部课目
+        this.getsubject()
+        // 获取全部教室
+        this.getAllClassRoom()
       }
 }
 </script>
