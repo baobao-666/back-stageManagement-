@@ -2,8 +2,39 @@
 
 import request from '@/utils/request'
 
+//获取所有的考试类型 
+export function getexamType() {
+  return request({
+    url: '/exam/examType',
+    method: 'get'
+  })
+}
+// 获取所有的课程
+export function getSubject() {
+  return request({
+    url: '/exam/subject',
+    method: 'get'
+  })
+}
+//获取所有的试题类型
+export function getQuestionsType() {
+  return request({
+    url: '/exam/getQuestionsType',
+    method: 'get'
+  })
+}
+
 // 创建试卷接口
-export const addExaminationPaperManagement = (params) => request.post('/exam/exam', { subject_id: params.subject_id, exam_id: params.exam_id, title: params.title,start_time: params.start_time, end_time: params.end_time ,number: params.number,})
+// export const addExaminationPaperManagement = ({params}) => request.post('/exam/exam', console.log(params) )
+export function addExaminationPaperManagement(data) {
+  console.log(data, 111111111111)
+  return request({
+    url: '/exam/exam',
+    method: 'post',
+    data
+  })
+}
+
 
 //  更新试卷接口
 export const updateExaminationPaperManagement = (params) => request.put('/exam/exam/w5tcy-g2dts', { subject_id: params.subject_id, exam_id: params.exam_id, title: params.title, start_time: params.start_time, end_time: params.end_time, number: params.number, })
