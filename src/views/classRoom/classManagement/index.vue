@@ -80,6 +80,10 @@ export default {
       //编辑事件
       handleEdit(index, row) {
         console.log(index, row);
+        localStorage.setItem("grade_name",row.grade_name)
+        localStorage.setItem("subject_text",row.subject_text)
+        localStorage.setItem("room_text",row.room_text)
+        this.FromFlag=true
       },
      //删除事件
       handleDelete(index, row) {

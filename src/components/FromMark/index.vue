@@ -2,7 +2,7 @@
    <div class="wrap_mark">
       <div class="mark_from">
            <div class="from-header">
-             <div>添加班级</div>
+              <div>添加班级</div>
              <div><i data-v-79bf621a=""  @click.self="heidenFlag" class="el-icon-close"></i></div>
            </div>
            <div class="from-main">
@@ -22,8 +22,8 @@
             <!-- 提价表单 -->
            </div>
            <div class="from-footer">
-              <el-button>取消</el-button>
-              <el-button class="submitClick" type="primary">提交</el-button>
+              <el-button @click="hideenFlag" >取消</el-button>
+              <el-button @click="addClass" class="submitClick" type="primary">提交</el-button>
            </div>
       </div>
    </div>
@@ -48,20 +48,53 @@ export default {
           region: [
             { required: true, message: '请选择活动区域', trigger: 'change' }
           ]
-        }
+        },
+        AddorSet:0
     }
   },
   computed:{
     ...mapState({
       AllClassRoom:state=>state.StudentClassClassroomManagement.AllClassRoom,
       Allsubject:state=>state.StudentClassClassroomManagement.Allsubject,
-
     })
   },
   methods:{
+    ...mapActions({
+        addStoreClass:"StudentClassClassroomManagement/addClass"
+    }),
     heidenFlag(){
+      // 箭头关闭
       this.$emit("update:FromFlag",false)
+    },
+    hideenFlag(){
+      // 取消按钮关闭
+       this.$emit("update:FromFlag",false)
+    },
+    addClass(){
+      // 添加教室数据
+      if(this.AddorSet===1){
+    
+      }else{
+      this.addStoreClass({
+        grade_name:this.ruleForm.class,
+        room_id:this.ruleForm.classroom,
+        subject_id:this.ruleForm.subject
+      })
+      }
+    
+      this.$emit("update:FromFlag",false)
+    },
+    setruleForm(){
+      if(localStorage.getItem('grade_name')&&localStorage.getItem('subject_text')&&localStorage.getItem('room_text')){
+          this.ruleForm.class=localStorage.getItem('grade_name')
+          this.ruleForm.classroom=localStorage.getItem('room_text')
+          this.ruleForm.subject=localStorage.getItem('subject_text')
+          this.AddorSet=1
+      }
     }
+  },
+  created(){
+    this.setruleForm()
   }
 }
 </script>

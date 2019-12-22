@@ -6,13 +6,13 @@ import request from '@/utils/request'
 export const getNoneClassType=()=>request.get('/manger/grade/new') 
 
 // 删除班级接口
-export function deleteClass(id) {
+export function deleteClass(grade_id) {
     return request({
-      url: `/manger/grade/delete/?grade_id=${id}`,
+      url: `/manger/grade/delete/${grade_id}`,
       method: 'delete'
     })
   }
-
+  // export const deleteClass=(data)=>request.delete('/manger/grade/delete',{params}) 
 // 更新班级信息接口
 export const UpdateClass=(params)=>request.put('/manger/grade/update',{grade_id:params.grade_id,grade_name:params.grade_name,subject_id:params.subject_id,room_id:params.room_id}) 
 
