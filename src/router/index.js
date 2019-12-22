@@ -141,22 +141,27 @@ export const constantRoutes = [
     path: '/exam',
     component: Layout,
     meta: { title: '考试管理', icon: 'guide', noCache: true },
-    redirect: 'index',
     children: [
       {
-        path: '/Addexam/index',
+        path: '/Addexam',
         component: () => import('@/views/exam/Addexam'),
         name: 'AddExam',
         meta: { title: '添加考试', icon: 'guide', noCache: true },
       },
       {
-        path: '/Listexam/index',
+        path: '/Listexam',
         component: () => import('@/views/exam/Listexam'),
         name: 'ListExam',
         meta: { title: '试卷列表', icon: 'guide', noCache: true },
-      }
+      },
+      {
+        path: '/Addexam/Addedit',
+        component: () => import('@/views/exam/Addedit'),
+        name: 'Addedit',
+      },
     ]
   },
+  
   {
     path: '/profile',
     component: Layout,
