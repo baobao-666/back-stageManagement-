@@ -23,10 +23,16 @@ export function logout() {
   })
 }
 export function getuser(data){
-  console.log(data,"++++++++")
+  // console.log(data,"++++++++")
   return request({
     url:'/user',
     method:'post',
     data
+  })
+}
+export function getList(){
+  return request({
+    url:'/user/user',
+    method:'get'
   })
 }
