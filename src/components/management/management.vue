@@ -1,8 +1,8 @@
 <template>
   <div class="count">
     <div class="wrap">
-
       <!-- 添加用户 -->
+
       <div class="addUser">
         <div class="title">
           <span
@@ -12,32 +12,12 @@
             @click="tab(index)"
           >{{item}}</span>
         </div>
+
         <!-- 内容 -->
-        <div class="list">
-          <!-- input -->
-          <div class="addUser_input">
-            <input type="text" placeholder="请输入用户名" />
-          </div>
-          <div class="addUser_input">
-            <input type="password" placeholder="请输入密码" />
-          </div>
-          <!-- 下拉框 -->
-          <div>
-            <el-select v-model="value" placeholder="请选择身份id">
-              <el-option
-                v-for="item in options"
-                :key="item.value"
-                :label="item.label"
-                :value="item.value"
-              ></el-option>
-            </el-select>
-          </div>
-          <!-- 按钮 -->
-          <div class="addUser_input">
-            <button class="bun">确定</button>
-            <button class="reset">重置</button>
-          </div>
-        </div>
+       <!-- 添加用户 -->
+        <Add v-if='showlist'/>
+        <!-- 更新用户 -->
+        <Update v-if="show" />
       </div>
 
       <!-- 添加身份 -->
@@ -110,7 +90,6 @@
         </div>
       </div>
 
-      
       <!--  -->
       <div class="addUser">
         <div class="addUser1">
@@ -186,15 +165,21 @@
   </div>
 </template>
 <script>
-import {mapActions,mapState} from 'vuex'
+import { mapActions, mapState } from "vuex";
+import Update from "./update";
+import Add from './Add'
 export default {
   props: {},
-  components: {},
+  components: {
+    Update,Add
+  },
   data() {
     return {
       list: ["添加用户", "更新用户"],
       cur: 0,
-      options: [
+      show: false,
+      showlist:false,
+     options: [
         {
           value: "选项1",
           label: "管理者"
@@ -212,28 +197,35 @@ export default {
     };
   },
   computed: {
-      ...mapState({
-          user:state=>state.user
-      })
+    ...mapState({
+      user: state => state.user
+    })
   },
   methods: {
     tab(index) {
       this.cur = index;
+      
+      if(this.cur==0){
+        this.show = false;
+      this.showlist=true
+      }else{
+        this.show = true;
+      this.showlist=false
+      }
+      
     },
     ...mapActions({
-        addUserList:'userPermission/getuser'
+      addUserList: "userPermission/getuser"
     })
   },
-  created(){
-      let obj={
-      user_name:'zhangdongming',
-      user_pwd:'Zhangdongming123!',
-    //   identity_id:'浏览者',
-      }
-      this.addUserList(obj)
-
-  },
- 
+  created() {
+    let obj = {
+      user_name: "zhangdongming",
+      user_pwd: "Zhangdongming123!",
+      identity_id: "浏览者"
+    };
+    this.addUserList(obj);
+  }
 };
 </script>
 <style scoped lang="scss">

@@ -12,34 +12,37 @@
       <p>用户数据</p>
     </div>
     <div class="token">
-      <p>
+      <!-- <p>
         <span>用户名</span>
         <span>密码</span>
         <span>身份</span>
-      </p>
-      <ul>
-        <li>zhaoxiaoru</li>
-        <li>10eea2ee3ad66731d1dbc283ddfca3bd94d6a5e7ec78b0e8fe0126d7f505b718</li>
-        <li>出题者</li>
-      </ul>
-       <ul>
-        <li>zhaoxiaoru</li>
-        <li>10eea2ee3ad66731d1dbc283ddfca3bd94d6a5e7ec78b0e8fe0126d7f505b718</li>
-        <li>出题者</li>
-      </ul>
+      </p> -->
+      <el-table
+    :data='userlist'
+      style="width: 100%">
+      <el-table-column
+        prop="user_name"
+        label="用户名"
+        width="180">
+      </el-table-column>
+      <el-table-column
+        prop="user_pwd"
+        label="密码"
+        width="700">
+      </el-table-column>
+      <el-table-column
+        prop="identity_text"
+        label="身份"
+       >
+      </el-table-column>
+    </el-table>
      
     </div>
-    <el-pagination
-  background
-  layout="prev, pager, next"
-  :total="1000"
-  class="page"
-  >
-</el-pagination>
+    
   </div>
 </template>
 <script>
-
+import {mapState,mapActions} from 'vuex'
 export default {
   props: {},
   components: {},
@@ -53,20 +56,26 @@ export default {
         "视图接口权限",
         "身份和视图权限关系"
       ],
-      curren: 0
+      curren: 0,
+    
     };
   },
   computed: {
-   
+   ...mapState({
+     userlist:state=>state.userPermission.userList
+   })
   },
   methods: {
     Tab(index) {
       this.curren = index;
     },
+    ...mapActions({
+      getList:'userPermission/getList'
+    })
    
   },
   created(){
-    
+    this.getList()
   },
 }
  
@@ -105,48 +114,9 @@ export default {
 }
 .token {
   width: 100%;
+  margin-top: 20px
  
 }
-.token p {
-  width: 100%;
-  height: 50px;
-  background: #fafafa;
-  line-height: 50px;
-  display: flex;
-  justify-content: space-between;
-}
-.token p span {
-border: none;
-line-height: 50px;
-margin: 0 10px;
-background: none;
 
-}
-.token p span:nth-child(2){
-   margin-right: 230px;
-}
-.token p span:first-child{
-    margin-left: 50px;
-}
-.token ul {
-  list-style: none;
-  display: flex;
-  justify-content: space-between;
-  margin: 0 10px;
-   height: 50px;
-    border-bottom: 1px solid #ccc;
-    font-size: 16px;
-    color: #595959;
-    line-height: 50px
-}
 
-.token ul li:first-child{
- margin:0 60px 0 0;
-}
-.page{
-    position: absolute;
-    right: 0;
-  
-   
-}
 </style>

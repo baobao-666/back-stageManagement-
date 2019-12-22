@@ -28,7 +28,7 @@ export const  addApiId =(params)=> request.get('/user//user/authorityApi/edit/ed
 export const  addUserApiId =(params)=> request.get('/user/setIdentityApi',{params})
 
 // 展示用户数据
-export const  showUsserMess =()=> request.get('/user/user')
+//export const  showUsserMess =()=> request.get('/user/user')
 
 // 展示api接口权限数据
 export const  showApiMess =()=> request.get('/user/api_authority')

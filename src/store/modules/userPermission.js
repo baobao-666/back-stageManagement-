@@ -1,13 +1,20 @@
 // 用户权限接口文档
-import {getuser} from '@/api/user'
+import {getuser,getList} from '@/api/user'
 const state = {
-user:[]
+user:[],
+userList:[]
+
 
 }
 
 const mutations = {
 getuserList(state,payload){
   state.user=payload
+
+},
+getuser(state,payload){
+  state.userList=payload
+ 
 
 }
 }
@@ -17,6 +24,11 @@ async getuser({commit},payload){
 let res=await getuser(payload)
 
 commit('getuserList',res)
+},
+async getList({commit},payload){
+let res=await getList(payload)
+console.log(res.data)
+commit ('getuser',res.data)
 }
 }
 
