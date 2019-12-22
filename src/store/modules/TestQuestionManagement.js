@@ -68,7 +68,7 @@ const actions = {
 
   // 添加试题
   async addTestQuestions({commit},payload){
-    await addTestQuestions(payload);
+     let res= await addTestQuestions(payload);
   },
 }
 
