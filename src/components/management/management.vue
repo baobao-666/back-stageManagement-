@@ -2,7 +2,6 @@
   <div class="count">
     <div class="wrap">
       <!-- 添加用户 -->
-
       <div class="addUser">
         <div class="title">
           <span
@@ -12,219 +11,83 @@
             @click="tab(index)"
           >{{item}}</span>
         </div>
-
-        <!-- 内容 -->
-       <!-- 添加用户 -->
-        <Add v-if='showlist'/>
+        <!-- 添加用户 -->
+        <Add v-if="showlist"/>
         <!-- 更新用户 -->
-        <Update v-if="show" />
+        <Update v-if="show"/>
       </div>
-
       <!-- 添加身份 -->
-      <div class="addUser">
-        <div class="title">
-          <span>添加身份</span>
-        </div>
-        <div class="list">
-          <!-- input -->
-          <div class="addUser_input">
-            <input type="text" placeholder="添加身份名称" />
-          </div>
-          <!-- 按钮 -->
-          <div class="addUser_input">
-            <button class="bun">确定</button>
-            <button class="reset">重置</button>
-          </div>
-        </div>
-      </div>
+      <AddList />
       <!-- 添加api接口权限 -->
-      <div class="addUser">
-        <div class="addUser1">
-          <div class="title">
-            <span>添加api接口权限</span>
-          </div>
-          <div class="list">
-            <!-- input -->
-            <div class="addUser_input">
-              <input type="text" placeholder="添加api接口权限" />
-            </div>
-            <div class="addUser_input">
-              <input type="text" placeholder="添加api接口权限url" />
-            </div>
-            <div class="addUser_input">
-              <input type="text" placeholder="添加api接口权限方法" />
-            </div>
-            <!-- 按钮 -->
-            <div class="addUser_input">
-              <button class="bun">确定</button>
-              <button class="reset">重置</button>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!--  -->
-      <div class="addUser">
-        <div class="addUser1">
-          <div class="title">
-            <span>添加视口接口权限</span>
-          </div>
-          <div class="list">
-            <!-- xiala -->
-            <div>
-              <el-select v-model="value" placeholder="请选择已有视口">
-                <el-option
-                  v-for="item in options"
-                  :key="item.value"
-                  :label="item.label"
-                  :value="item.value"
-                ></el-option>
-              </el-select>
-            </div>
-            <!-- 按钮 -->
-            <div class="addUser_input">
-              <button class="bun">确定</button>
-              <button class="reset">重置</button>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!--  -->
-      <div class="addUser">
-        <div class="addUser1">
-          <div class="title">
-            <span>给身份设置api接口权限</span>
-          </div>
-          <div class="list">
-            <div>
-              <el-select v-model="value" placeholder="请选择身份id">
-                <el-option
-                  v-for="item in options"
-                  :key="item.value"
-                  :label="item.label"
-                  :value="item.value"
-                ></el-option>
-              </el-select>
-            </div>
-            <div class="el">
-              <el-select v-model="value" placeholder="请选择api接口权限">
-                <el-option
-                  v-for="item in options"
-                  :key="item.value"
-                  :label="item.label"
-                  :value="item.value"
-                ></el-option>
-              </el-select>
-            </div>
-
-            <!-- 按钮 -->
-            <div class="addUser_input">
-              <button class="bun">确定</button>
-              <button class="reset">重置</button>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!--  -->
-      <div class="addUser">
-        <div class="addUser1">
-          <div class="title">
-            <span>给身份设置视口权限</span>
-          </div>
-          <div class="list">
-            <div class="el-select">
-              <el-select v-model="value" placeholder="请选择身份id">
-                <el-option
-                  v-for="item in options"
-                  :key="item.value"
-                  :label="item.label"
-                  :value="item.value"
-                ></el-option>
-              </el-select>
-            </div>
-            <div class="el">
-              <el-select v-model="value" placeholder="请选择视图接口权限">
-                <el-option
-                  v-for="item in options"
-                  :key="item.value"
-                  :label="item.label"
-                  :value="item.value"
-                ></el-option>
-              </el-select>
-            </div>
-            <!-- 按钮 -->
-            <div class="addUser_input">
-              <button class="bun">确定</button>
-              <button class="reset">重置</button>
-            </div>
-          </div>
-        </div>
-      </div>
+      <ApiList />
+      <!-- 添加视图接口权限 -->
+       <Viewtoken />
+      <!-- 身份设置api接口权限 -->
+     <Userapi />
+      <!-- 身份设置视图权限 -->
+      <ViewList />
     </div>
   </div>
 </template>
 <script>
 import { mapActions, mapState } from "vuex";
+import AddList from "@/views/exs/userList/addList";
+import ApiList from "@/views/exs/userList/apiList";
+import Userapi from "@/views/exs/userList/userapi";
+import ViewList from "@/views/exs/userList/viewList";
+import Viewtoken from "@/views/exs/userList/viewtoken";
 import Update from "./update";
-import Add from './Add'
+import Add from "./Add";
 export default {
   props: {},
   components: {
-    Update,Add
+    Update,
+    Add,
+    AddList,
+    ApiList,
+    Userapi,
+    ViewList,
+    Viewtoken
   },
   data() {
     return {
       list: ["添加用户", "更新用户"],
       cur: 0,
       show: false,
-      showlist:false,
-     options: [
-        {
-          value: "选项1",
-          label: "管理者"
-        },
-        {
-          value: "选项2",
-          label: "出题者"
-        },
-        {
-          value: "选项3",
-          label: "浏览者"
-        }
-      ],
-      value: ""
+      showlist: true,
+      
+      
     };
   },
   computed: {
     ...mapState({
-      user: state => state.user
+      user: state => state.user,
+      
     })
   },
   methods: {
     tab(index) {
       this.cur = index;
-      
-      if(this.cur==0){
+      if (this.cur === 0) {
         this.show = false;
-      this.showlist=true
-      }else{
+        this.showlist = true;
+      } else {
         this.show = true;
-      this.showlist=false
+        this.showlist = false;
       }
-      
     },
     ...mapActions({
-      addUserList: "userPermission/getuser"
+      addUserList: "userPermission/getuser",
+     
     })
   },
   created() {
     let obj = {
       user_name: "zhangdongming",
-      user_pwd: "Zhangdongming123!",
-      identity_id: "浏览者"
+      user_pwd: "Zhangdongming123!"
     };
     this.addUserList(obj);
+   
   }
 };
 </script>

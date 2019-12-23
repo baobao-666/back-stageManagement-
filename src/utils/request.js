@@ -5,9 +5,9 @@ import { getToken } from '@/utils/auth'
 
 // create an axios instance
 const service = axios.create({
-  baseURL: 'http://169.254.0.62:7002', // url = base url + request url
+  baseURL: 'http://169.254.124.14:7002', // url = base url + request url
   // withCredentials: true, // send cookies when cross-domain requests
-  // timeout: 5000 // request timeout
+   timeout: 5000 // request timeout
 })
 
 // request interceptor
@@ -25,7 +25,7 @@ service.interceptors.request.use(
   error => {
     // do something with request error
     console.log(error) // for debug
-    return Promise.reject(error)
+    return Promise.reject(error) 
   }
 )
 
