@@ -15,32 +15,28 @@
         <el-main>
           <!-- 表格 -->
                 <el-table
-                 :data="classRoomList"
-                 style="width: 100%">
+                 :data="pageList"
+                 style="width: 100%">z
                  <el-table-column
-                   prop="grade_name"
-                   label="姓名"
-                   width="180">
+                   prop="student_name"
+                   label="姓名">
                  </el-table-column>
                  <el-table-column
-                   prop="subject_text"
+                   prop="student_id"
                    label="学号"
-                   width="180">
+                   width="250">
                  </el-table-column>
                  <el-table-column
                    prop="subject_text"
-                   label="班级"
-                   width="180">
+                   label="班级">
                  </el-table-column>
                  <el-table-column
-                   prop="subject_text"
-                   label="教室"
-                   width="180">
+                   prop="room_text"
+                   label="教室">
                  </el-table-column>
                  <el-table-column
-                   prop="subject_text"
-                   label="密码"
-                   width="180">
+                   prop="student_pwd"
+                   label="密码">
                  </el-table-column>
                  <!-- 操作 -->
                  <el-table-column label="操作">
@@ -55,23 +51,17 @@
                   <el-pagination
                   @size-change="handleSizeChange"
                   @current-change="handleCurrentChange"
-                  :current-page="currentPage4"
-                  :page-sizes="[100, 200, 300, 400]"
-                  :page-size="100"
+                  :page-sizes="AllPage"
                   layout="total, sizes, prev, pager, next, jumper"
-                  :total="400">
+                  :total="AllStatude.length">
                   </el-pagination>
                 <!-- 分页 -->
-
-
-
-
         </el-main>
     </el-container>
 </template>
 
 <script>
-import { mapState, mapActions } from 'vuex'
+import { mapState, mapActions, mapMutations } from 'vuex'
 
 export default {
     data(){
@@ -80,21 +70,37 @@ export default {
              classroom:""
             },
             input:"",
-            currentPage4: 4
+            AllPage:[10, 20, 30, 40]
         }
     },
     computed:{
         ...mapState({
-            Allstudent: state=>state.StudentClassClassroomManagement.Allstudent
+            AllStatude: state=>state.setStatude.AllStatude,
+            pageList: state=>state.setStatude.pageList
         })
     },
     methods:{
         ...mapActions({
-           getStudent:"StudentClassClassroomManagement/getStudent"
-        })
+           getStatude:"setStatude/getStatude",
+           deleteStatude:"setStatude/deleteStatude"
+        }),
+        ...mapMutations({
+           setPage:"setStatude/setPage",
+           setPageSize:"setStatude/setPageSize"
+        }),
+        handleDelete(index,item){
+            console.log(item);
+            this.deleteStatude(item.student_id)
+        },
+        handleSizeChange(val) {
+        this.setPageSize(val)
+        },
+        handleCurrentChange(val) {
+          this.setPage(val)
+        }
     },
     created(){
-        this.getStudent()
+        this.getStatude()
     }
 }
 </script>

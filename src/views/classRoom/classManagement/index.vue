@@ -33,13 +33,8 @@
                  <!-- 操作 -->
                  <el-table-column label="操作">
                    <template slot-scope="scope">
-                     <el-button
-                       size="mini"
-                       @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
-                     <el-button
-                       size="mini"
-                       type="danger"
-                       @click="handleDelete(scope.$index, scope.row)">删除</el-button>
+                     <span @click="handleEdit(scope.$index, scope.row)">编辑</span> |
+                     <span @click="handleDelete(scope.$index, scope.row)">删除</span>
                    </template>
                  </el-table-column>
                  <!-- 操作 -->
@@ -67,15 +62,16 @@ export default {
       },
       computed:{
        ...mapState({
-         classRoomList: state=>state.StudentClassClassroomManagement.classRoomList
+         classRoomList: state=>state.StudentClassClassroomManagement.classRoomList,
+         AllClassRoom: state=>state.setClass.AllClassRoom
        })
       },
       methods:{
         ...mapActions({
           getIfClassRoom:"StudentClassClassroomManagement/getIfClassRoom",
-          deleteClassRoom:"StudentClassClassroomManagement/deleteClassRoom",
+          deleteClass:"StudentClassClassroomManagement/deleteClass",
           getsubject:"StudentClassClassroomManagement/getsubject", 
-          getAllClassRoom:"StudentClassClassroomManagement/getAllClassRoom"      
+          getAllClassRoom:"setClass/getAllClassRoom",   
         }),
       //编辑事件
       handleEdit(index, row) {
@@ -83,11 +79,14 @@ export default {
         localStorage.setItem("grade_name",row.grade_name)
         localStorage.setItem("subject_text",row.subject_text)
         localStorage.setItem("room_text",row.room_text)
+        localStorage.setItem("grade_id",row.grade_id)
         this.FromFlag=true
       },
      //删除事件
       handleDelete(index, row) {
-        this.deleteClassRoom(row.grade_id)
+        this.deleteClass(row.grade_id).then(res=>{
+           this.getIfClassRoom()
+        })                             
       },
      //添加弹出蒙层
       open() {
@@ -113,5 +112,8 @@ export default {
 }
 .class-contniner{
   padding: 24px
+}
+span{
+  color: blue;
 }
 </style>
