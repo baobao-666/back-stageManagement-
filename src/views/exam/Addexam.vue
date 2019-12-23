@@ -7,7 +7,7 @@
           <span>*</span>
           <span>试卷名称</span>
         </p>
-        <el-input v-model="title"></el-input>
+       <el-input v-model="title"></el-input>
       </div>
       <div>
         <p>
@@ -48,19 +48,11 @@
         <p>考试时间</p>
         <div class="time_con">
           <div class="block">
-            <!-- <el-date-picker v-model="start_time" type="date" placeholder="开始时间"></el-date-picker>
+            <el-date-picker v-model="start_time" type="date" placeholder="开始时间"></el-date-picker>
           </div>
           <span style="margin-right:10px;margin-top:3px;">-</span>
           <div class="block">
-            <el-date-picker v-model="end_time" type="date" placeholder="结束时间"></el-date-picker>-->
-            <el-date-picker
-              v-model="start_time"
-              type="datetimerange"
-              align="right"
-              start-placeholder="开始日期"
-              end-placeholder="结束日期"
-              :default-time="['12:00:00', '08:00:00']"
-            ></el-date-picker>
+            <el-date-picker v-model="end_time" type="date" placeholder="结束时间"></el-date-picker>
           </div>
         </div>
       </div>
@@ -92,8 +84,7 @@ export default {
     ...mapActions({
       getexamType: "ExaminationPaperManagement/getexamType",
       getSubject: "ExaminationPaperManagement/getSubject",
-      addExaminationPaperManagement:
-        "ExaminationPaperManagement/addExaminationPaperManagement"
+      addExaminationPaperManagement:"ExaminationPaperManagement/addExaminationPaperManagement"
     }),
     submit() {
       // console.log(this.form.start_time=+this.form.start_time,this.form.end_time=+this.form.end_time);
@@ -110,7 +101,8 @@ export default {
     }
   },
   created() {
-    this.getexamType(), this.getSubject();
+    this.getexamType(),
+    this.getSubject();
   }
 };
 </script>
@@ -172,7 +164,7 @@ h2 {
   height: 32px;
   border-radius: 2px;
 }
-.el-input__inner {
+ .el-input__inner {
   width: 120px;
   height: 32px;
   padding: 0;

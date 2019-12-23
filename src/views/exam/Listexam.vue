@@ -41,7 +41,7 @@
             </div>
           </div>
           <el-table
-            :data="paperList.filter(data => !search || data.name.toLowerCase().includes(search.toLowerCase()))"
+            :data="tableData.filter(data => !search || data.name.toLowerCase().includes(search.toLowerCase()))"
             style="width: 100%"
           >
             <el-table-column label="试卷信息" prop="date"></el-table-column>
@@ -76,7 +76,6 @@ export default {
         region: "", //考试类型
         course: "" //课程列表
       },
-
       tableData: [],
       search: ""
     };
@@ -91,7 +90,7 @@ export default {
   methods: {
     handleEdit(index, row) {
       console.log(index, row);
-    },
+    }, 
     handleDelete(index, row) {
       console.log(index, row);
     },
