@@ -1,114 +1,240 @@
 <template>
-  <div class="add-page">
+  <div class="box">
     <h2>添加考试</h2>
-    <div class="content">
-      <el-form ref="form" :model="form" label-width="110px">
-        <el-form-item label="*试卷名称*">
-          <el-input v-model="form.title" width="110px"></el-input>
-        </el-form-item>
-        <el-form-item label="*选择考试类型*">
-          <el-select v-model="form.exam_id">
-            <el-option value="周考一"></el-option>
-            <el-option value="周考二"></el-option>
-            <el-option value="周考三"></el-option>
-            <el-option value="月考"></el-option>
-          </el-select>
-        </el-form-item>
-
-        <el-form-item label="* 选择课程:">
-          <el-select v-model="form.subject_id">
-            <el-option label="JS上" value="JS上"></el-option>
-            <el-option label="JS下" value="JS下"></el-option>
-            <el-option label="模块化开发" value="模块化开发"></el-option>
-            <el-option label="移动端开发" value="移动端开发"></el-option>
-            <el-option label="node基础" value="node基础"></el-option>
-            <el-option label="组件化开发" value="组件化开发"></el-option>
-            <el-option label="渐进式开发" value="渐进式开发"></el-option>
-            <el-option label="项目实战" value="项目实战"></el-option>
-            <el-option label="高级JS" value="高级JS"></el-option>
-            <el-option label="Node高级" value="Node高级"></el-option>
-          </el-select>
-        </el-form-item>
-        <el-form-item label="* 设置题量:">
-          <el-select v-model="form.number"></el-select>
-        </el-form-item>
-
-        <el-form-item label="考试时间:">
-          <el-col :span="5">
-            <el-date-picker type="date" placeholder="开始时间" v-model="form.start_time"></el-date-picker>
-          </el-col>
-          <el-col :span="3">-</el-col>
-          <el-col :span="5">
-            <el-time-picker placeholder="结束时间" v-model="form.end_time"></el-time-picker>
-          </el-col>
-        </el-form-item>
-        <el-form-item>
-          <el-button type="primary" @click="onSubmit">创建试卷</el-button>
-        </el-form-item>
-      </el-form>
+    <div class="con">
+      <div class="name">
+        <p>
+          <span>*</span>
+          <span>试卷名称</span>
+        </p>
+        <el-input v-model="title"></el-input>
+      </div>
+      <div>
+        <p>
+          <span>*</span>
+          <span>选择考试类型:</span>
+        </p>
+        <el-select v-model="exam_id" placeholder=" ">
+          <el-option
+            v-for="(item, index) in typeList"
+            :key="index"
+            :label="item.exam_name"
+            :value="item.exam_id"
+          ></el-option>
+        </el-select>
+      </div>
+      <div>
+        <p>
+          <span>*</span>
+          <span>选择课题:</span>
+        </p>
+        <el-select v-model="subject_id">
+          <el-option
+            v-for="(item, index) in subjectList"
+            :key="index"
+            :label="item.subject_text"
+            :value="item.subject_id"
+          ></el-option>
+        </el-select>
+      </div>
+      <div>
+        <p>
+          <span>*</span>
+          <span>设置题量</span>
+        </p>
+        <el-input-number ref="ipt" v-model="number" controls-position="right" :min="1" :max="10"></el-input-number>
+      </div>
+      <div class="time">
+        <p>考试时间</p>
+        <div class="time_con">
+          <div class="block">
+            <!-- <el-date-picker v-model="start_time" type="date" placeholder="开始时间"></el-date-picker>
+          </div>
+          <span style="margin-right:10px;margin-top:3px;">-</span>
+          <div class="block">
+            <el-date-picker v-model="end_time" type="date" placeholder="结束时间"></el-date-picker>-->
+            <el-date-picker
+              v-model="start_time"
+              type="datetimerange"
+              align="right"
+              start-placeholder="开始日期"
+              end-placeholder="结束日期"
+              :default-time="['12:00:00', '08:00:00']"
+            ></el-date-picker>
+          </div>
+        </div>
+      </div>
+      <el-button type="primary" @click="submit">创建考试</el-button>
     </div>
   </div>
 </template>
 <script>
-import { mapState, mapActions } from "vuex";
+import { mapState, mapActions, mapMutations } from "vuex";
 export default {
   data() {
     return {
-      form: {
-        subject_id: "", //学科
-        exam_id: "", //试卷类型id
-        title: "", //试卷标题
-        number: "", //试卷题量,默认4 可传可不传
-        start_time: "", //开始时间
-        end_time: "" //结束时间
-      }
+      subject_id: "",
+      exam_id: "",
+      title: "",
+      number: 3,
+      start_time: "",
+      end_time: ""
     };
   },
   computed: {
     ...mapState({
       typeList: state => state.ExaminationPaperManagement.typeList,
-      subjectList:state => state.ExaminationPaperManagement.subjectList,
-      questTypeList:state => state.ExaminationPaperManagement.questTypeList
+      subjectList: state => state.ExaminationPaperManagement.subjectList,
+      AddList: state => state.ExaminationPaperManagement.AddList
     })
   },
   methods: {
-    ...mapActions({ getexamType: "ExaminationPaperManagement/getexamType", getSubject:"ExaminationPaperManagement/getSubject",getQuestionsType:"ExaminationPaperManagement/getQuestionsType"}),
-
-    onSubmit() {
-      // console.log(this.form)
-      // this.addExaminationPaperManagement({subject_id:this.form.subject_id,exam_id:this.form.exam_id,title:this.form.title,number:this.form.number,start_time:this.form.start_time,end_time:this.form.end_time})
-      // this.$router.push('/Addexam/Addedit')
+    ...mapActions({
+      getexamType: "ExaminationPaperManagement/getexamType",
+      getSubject: "ExaminationPaperManagement/getSubject",
+      addExaminationPaperManagement:
+        "ExaminationPaperManagement/addExaminationPaperManagement"
+    }),
+    submit() {
+      // console.log(this.form.start_time=+this.form.start_time,this.form.end_time=+this.form.end_time);
+      let form = {
+        subject_id: this.subject_id,
+        exam_id: this.exam_id,
+        title: this.title,
+        start_time: this.start_time * 1,
+        end_time: this.end_time * 1
+      };
+      localStorage.setItem("info", JSON.stringify(form));
+      this.addExaminationPaperManagement(form);
+      this.$router.push("/Addexam/Addedit");
     }
   },
   created() {
-    this.getexamType(),
-    this.getSubject(),
-    this.getQuestionsType()
+    this.getexamType(), this.getSubject();
   }
 };
 </script>
-<style scoped lang="scss">
-el-form {
-  display: flex;
-  flex-direction: column;
+<style lang="scss" scoped>
+/deep/ .is-controls-right {
+  width: 100px;
 }
-.add-page {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  padding: 0 24px 24px 24px;
+/deep/ .ipt {
+  width: 100px;
+}
+* {
+  padding: 0;
+  margin: 0;
+  list-style-type: none;
 }
 h2 {
+  padding: 20px 0px;
   margin-top: 10px;
-  padding: 20px 0;
+  margin-bottom: 0.5em;
+  color: rgba(0, 0, 0, 0.85);
+  font-weight: 500;
+  font-size: 21px;
 }
-.count {
-  width: 100%;
-  height: 100%;
-  .el-form-item--medium .el-form-item__content {
-    display: flex;
-    flex-direction: column;
+.box {
+  background: #f0f2f5;
+  box-sizing: border-box;
+  overflow-x: hidden;
+  padding: 0px 24px 24px;
+}
+.con {
+  margin: 0 0 24px;
+  padding: 24px;
+  background: #fff;
+  border-radius: 10px;
+  box-sizing: border-box;
+  margin-top: 10px;
+}
+.my-autocomplete {
+  li {
+    line-height: normal;
+    padding: 7px;
+
+    .name {
+      text-overflow: ellipsis;
+      overflow: hidden;
+    }
+    .addr {
+      font-size: 12px;
+      color: #b4b4b4;
+    }
+
+    .highlighted .addr {
+      color: #ddd;
+    }
   }
+}
+/deep/ .el-select {
+  width: 120px;
+  height: 32px;
+  border-radius: 2px;
+}
+.el-input__inner {
+  width: 120px;
+  height: 32px;
+  padding: 0;
+  // text-indent: .5em;
+}
+//  .el-input__inner:last-child {
+//   text-indent: 0em;
+// }
+
+.name /deep/ .el-input__inner:nth-child(1) {
+  width: 435px;
+}
+.time /deep/ .el-input__inner:nth-child(1) {
+  width: 205px;
+}
+.el-select {
+  display: block;
+}
+/deep/ .el-input-number__increase,
+/deep/ .el-input-number__decrease {
+  width: 21px;
+  height: 15px !important;
+  line-height: 15px;
+  color: rgba(0, 0, 0, 0.45);
+  background: #fff;
+}
+/deep/ .el-input-number__increase {
+  margin-top: 3px;
+}
+/deep/ .el-input-number__decrease {
+  margin-bottom: 3px;
+}
+.time_con {
+  display: flex;
+  flex-direction: row;
+}
+.time /deep/ .el-input__prefix {
+  width: 30px;
+  margin-left: 170px;
+}
+button {
+  width: 136px;
+  height: 32px;
+  background: linear-gradient(-90deg, #4e75ff, #0139fd) !important;
+  padding: 0 40px !important;
+  border-radius: 4px !important;
+  border: 0 !important;
+  font-size: 14px !important;
+  color: #fff !important;
+  margin-top: 35px;
+  margin-bottom: 25px;
+}
+p {
+  margin-top: 25px;
+  margin-bottom: 15px;
+  font-size: 14px;
+}
+p span:nth-child(1) {
+  color: red;
+  margin-right: 5px;
+}
+/deep/ .qq {
+  width: 435px;
 }
 </style>
