@@ -263,7 +263,7 @@ export const asyncRoutes = [
       {
         path: 'add',
         component: () => import('@/views/test-questions/add'),
-        name: 'Test-questions',
+        name: 'test-questions',
         meta: {
           title: '添加试题',
           // roles: ['admin'] // or you can only set roles in sub nav
@@ -284,8 +284,16 @@ export const asyncRoutes = [
         name: 'Test-questions',
         meta: {
           title: '查看试题',
-          // roles: ['admin'] // or you can only set roles in sub nav
-        }
+        },
+      },
+      {
+        path: 'update',
+        hidden:true,
+        component: () => import('@/views/test-questions/update/'),
+        name: 'Test-update',
+        meta: {
+          title: '编辑试题',
+        },
       }
     ]
   },
