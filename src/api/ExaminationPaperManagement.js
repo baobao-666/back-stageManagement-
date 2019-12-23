@@ -16,24 +16,17 @@ export function getSubject() {
     method: 'get'
   })
 }
-//获取所有的试题类型
-export function getQuestionsType() {
-  return request({
-    url: '/exam/getQuestionsType',
-    method: 'get'
-  })
-}
 
 // 创建试卷接口
-// export const addExaminationPaperManagement = ({params}) => request.post('/exam/exam', console.log(params) )
-export function addExaminationPaperManagement(data) {
-  console.log(data, 111111111111)
-  return request({
-    url: '/exam/exam',
-    method: 'post',
-    data
-  })
-}
+export const addExaminationPaperManagement = ({params}) => request.post('/exam/new', console.log(params) )
+// export function addExaminationPaperManagement({data}) {
+//   console.log(data, 111111111111)
+//   return request({
+//     url: '/exam/exam',
+//     method: 'post',
+//     data
+//   })
+// }
 
 
 //  更新试卷接口
