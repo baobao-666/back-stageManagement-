@@ -27,4 +27,4 @@ export const addTestQuestionsType = (params) => request.get('/exam/insertQuestio
 export const getTopicQuestionsType = () => request.get('/exam/getQuestionsType')
 
 // 按条件获取试题
-// export const getTestQuestionsType = (params) => request.get('/exam/questions/condition',{questions_id:params.questions_id,questions_type_id:params.questions_type_id,subject_id:params.subject_id,exam_id:params.exam_id})
+export const getSearchTestQuestions = (params) => request.get('/exam/questions/condition',{params})
