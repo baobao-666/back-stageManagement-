@@ -153,7 +153,6 @@ export default {
     }
   },
   created() {
-    console.log("123456", this.exam);
     //调用考试类型接口
     this.getTestQuestionsType();
     //调用课程类型接口

@@ -39,6 +39,7 @@
             <div class="testEle" 
                 v-for="(item,index) in testQuestionsList"
                 :key="index"
+                @click="detail(item)"
             >
                 <div class="testEleLeft">
                     <p class="testTitle">{{item.title}}</p>
@@ -49,7 +50,7 @@
                         <p class="testUser">{{item.user_name}} 发布</p>
                     </div>
                 </div>
-                <span class="spanbian" @click="update(item.questions_id)">编辑</span>
+                <span class="spanbian" @click.stop="update(item.questions_id)">编辑</span>
             </div>
         </div>
     </div>
@@ -115,15 +116,17 @@ export default {
             let subject_id = this.subject_id, // 课目ID
                 questions_type_id = this.form.topic, // 课题类型
                 exam_id = this.form.exam ;     // 考试类型
-                console.log(questions_type_id,subject_id,exam_id,'che');
             this.getSearchTestQuestions({questions_type_id,subject_id,exam_id});
             // 查询渲染接口  更新页面
             this.updateSearch();
         },
         // 编辑
         update(questions_id){
-            console.log(questions_id,'questions_id')
             this.$router.push({path:'/test-questions/update',query:{id:questions_id}})
+        },
+        // 详情
+        detail(item){
+            this.$router.push({path:'/test-questions/detail',query:item})
         }
     },
     created(){

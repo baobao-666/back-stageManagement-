@@ -1,6 +1,6 @@
 <template>
     <div>
-        <el-button style="margin:10px">+ 添加类型</el-button>
+        <el-button class="addBtn" style="margin:10px" @click="addSubject">+ 添加类型</el-button>
         <el-table
         :data="topicList"
         style="width: 100%"
@@ -31,12 +31,14 @@ export default {
         
     },
     data(){
-        return {
-
+        return {                      
         }
+    },
+    watch:{
     },
     computed:{
         ...mapState({
+            // 题目数据
             topicList:state=>state.TestQuestionManagement.topicList,
         })
     },
@@ -50,18 +52,47 @@ export default {
         return '';
       },
         ...mapActions({
-                  getTopicQuestionsType: "TestQuestionManagement/getTopicQuestionsType",
-        })
+            // 题目类型接口
+            getTopicQuestionsType: "TestQuestionManagement/getTopicQuestionsType",  
+            // 添加试题类型
+            addTestQuestionsType:"TestQuestionManagement/addTestQuestionsType",
+        }),
+        // 添加试题类型
+         addSubject(){
+            this.$prompt('请输入类型！', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+        }).then(async ({ value }) => {
+            let text = value,                    // 试题名称
+                sort = this.topicList.length+1; // 试题序号
+                 // 添加试题类型接口
+                await this.addTestQuestionsType({text,sort});
+                // 重绘页面
+                await this.getTopicQuestionsType();
+          this.$message({
+            type: 'success',
+            message: '添加成功！'
+          });
+        }).catch(() => {
+          this.$message({
+            type: 'info',
+            message: '取消输入'
+          });       
+        });
+        
+        }
     },
     created(){
-        this.getTopicQuestionsType();
-        console.log(this.topicList,'123456aaa')
+        // 题目类型接口
+        this.getTopicQuestionsType(); 
     },
     mounted(){
-
     }
 }
 </script>
 <style scoped lang="scss">
-
+    .addBtn{
+        background: #0139fd;
+        color: #fff;
+    }
 </style>
