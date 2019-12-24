@@ -1,5 +1,5 @@
 // 用户权限接口文档
-import {getuser,getList,getidentity,getviews,getapi,getidentity_api} from '@/api/userList'
+import {getuser,getList,getidentity,getviews,getapi,getidentity_api,getidentity_view} from '@/api/userList'
 import { param } from '@/utils'
 const state = {
 user:[],//添加用户
@@ -7,7 +7,8 @@ userList:[],//展示用户数据
 identity:[],//身份数据
 views:[],//视图接口权限
 api:[],//api权限数据
-identity_api:[]//api和身份权限关系
+identity_api:[],//api和身份权限关系
+view_id:[],//身份和视图权限关系
 
 
 }
@@ -39,6 +40,10 @@ state.api=payload
 //api和身份权限关系数据
 getidentity_api(state,payload){
 state.identity_api=payload
+},
+//身份和视图权限关系
+getview_token(state,payload){
+state.view_id=payload
 }
 }
 
@@ -63,7 +68,7 @@ async getidentity({commit},payload){
 //
 async getviews({commit},payload){
   let res=await getviews(payload)
-  //console.log(res.data)
+  console.log(res.data)
   commit('getviewID',res.data)
 },
 //
@@ -75,8 +80,14 @@ commit('getapiId',res.data)
 //
 async getidentity_api({commit},payload){
   let res=await getidentity_api(payload)
-  console.log(res)
-  commit('getidentity_api',res)
+  console.log(res.data)
+  commit('getidentity_api',res.data)
+},
+//
+async getidentity_view({commit},payload){
+  let res=await getidentity_view(payload)
+  console.log(res.data)
+  commit('getview_token',res.data)
 }
 }
 

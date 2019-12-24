@@ -1,8 +1,7 @@
 import request from '@/utils/request'
 //添加用户
 export function getuser(data){
-    console.log(data,"++++++++")
-   return request({
+return request({
      url:'/user',
      method:'post',
      data
@@ -40,6 +39,13 @@ export function getuser(data){
  export function getidentity_api(){
    return request({
      url:'/user/identity_api_authority_relation',
+     method:'get'
+   })
+ }
+ //展示身份和视图权限关系
+ export function getidentity_view(){
+   return request({
+     url:'/user/identity_view_authority_relation',
      method:'get'
    })
  }
