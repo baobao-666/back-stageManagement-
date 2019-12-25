@@ -44,19 +44,19 @@
             :data="tableData.filter(data => !search || data.name.toLowerCase().includes(search.toLowerCase()))"
             style="width: 100%"
           >
-            <el-table-column label="试卷信息" prop="date"></el-table-column>
-            <el-table-column label="班级" prop="name"></el-table-column>
-            <el-table-column label="创建人" prop="date"></el-table-column>
-            <el-table-column label="开始时间" prop="name"></el-table-column>
-            <el-table-column label="结束时间" prop="date"></el-table-column>
+            <el-table-column label="试卷信息" prop="title"></el-table-column>
+            <el-table-column label="班级" prop="grade_name"></el-table-column>
+            <el-table-column label="创建人" prop="user_name"></el-table-column>
+            <el-table-column label="开始时间" prop="start_time"></el-table-column>
+            <el-table-column label="结束时间" prop="end_time"></el-table-column>
             <el-table-column align="right">
               <template slot-scope="scope">
-                <el-button size="mini" @click="handleEdit(scope.$index, scope.row)">Edit</el-button>
-                <el-button
+                <el-button size="mini" @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
+                <!-- <el-button
                   size="mini"
                   type="danger"
                   @click="handleDelete(scope.$index, scope.row)"
-                >Delete</el-button>
+                >Delete</el-button> -->
               </template>
             </el-table-column>
           </el-table>
@@ -86,6 +86,21 @@ export default {
       subjectList: state => state.ExaminationPaperManagement.subjectList,
       paperList: state => state.ExaminationPaperManagement.paperList
     })
+  },
+  watch:{
+    paperList(now){
+      console.log(now,'+++++++++++++')
+      this.tableData = now.exam.map(item=>{
+        return {
+          title:item.title,
+          grade_name:item.grade_name,
+          user_name:item.user_name,
+          start_time:item.start_time,
+          end_time:item.end_time,
+         
+        }
+      })
+    }
   },
   methods: {
     handleEdit(index, row) {

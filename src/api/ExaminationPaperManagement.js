@@ -18,15 +18,15 @@ export function getSubject() {
 }
 
 // 创建试卷接口
-export const addExaminationPaperManagement = ({params}) => request.post('/exam/new', console.log(params) )
-// export function addExaminationPaperManagement({data}) {
-//   console.log(data, 111111111111)
-//   return request({
-//     url: '/exam/exam',
-//     method: 'post',
-//     data
-//   })
-// }
+// export const addExaminationPaperManagement = ({params}) => request.post('/exam/new', console.log(params) )
+export function addExaminationPaperManagement(payload) {
+  console.log(payload,"....payload")
+  return request({
+    url: '/exam/exam',
+    method: 'post',
+    data:payload
+  })
+}
 
 
 //  更新试卷接口
