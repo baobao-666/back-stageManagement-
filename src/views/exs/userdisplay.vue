@@ -15,7 +15,7 @@
     <!-- api接口权限 -->
     <Apitoken v-if="api" />
     <!-- 身份和api接口关系 -->
-    <Identity v-if="Identity" />
+    <Identity v-if="identity" />
     <!-- 视图接口权限 -->
     <ViewList v-if="viewList" />
     <!-- 身份和视图权限关系 -->
@@ -53,7 +53,7 @@ export default {
       name: true,
       shenfen: false,
       api: false,
-      Identity: false,
+      identity: false,
       viewList: false,
       viewToken: false
     };
@@ -66,40 +66,32 @@ export default {
         this.name = true,
           this.shenfen = false,
           this.api = false,
-          this.Identity = false,
+          this.identity = false,
           this.viewList = false,
           this.viewToken = false
-      } else {
-        this.name = false,
-         this.shenfen = true
-      }
+      } 
       if (this.curren === 1) {
-        this.shenfen = true, 
-        this.api = false;
-      } else {
-        this.shenfen = false,
-         this.api = true;
-      }
+        this.shenfen = true
+         this.name = false
+       
+      } 
       if (this.curren === 2) {
-        this.api = true, 
-        this.identity = false;
-      } else {
-        this.api = false, 
-        this.identity = true;
-      }
+        this.api = true
+        this.shenfen = false
+       
+      } 
       if (this.curren === 3) {
-        this.identity = true,
-         this.viewList = false;
-      } else {
-        this.identity = false,
-         this.viewList = true;
-      }
+        this.identity = true
+          this.api = false
+      } 
       if (this.curren === 4) {
-        this.viewList = true, 
-        this.viewToken = false;
-      } else {
-        this.viewList = false,
-         this.viewToken = true;
+        this.viewList =true,
+        this.identity=false
+      }
+      if(this.curren===5){
+        this.viewToken=true,
+        this.viewList=false
+
       }
     }
   },
