@@ -89,7 +89,7 @@ export default {
             this.getIfClassRoom()
             this.$emit("update:FromFlag",false)
         })
-      }else{
+      }else{  
         this.UpdateClass({
            grade_id:localStorage.getItem("grade_id"),
            room_id:this.ruleForm.classroom,

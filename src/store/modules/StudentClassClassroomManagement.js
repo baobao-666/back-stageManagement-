@@ -1,6 +1,6 @@
 // 学生、班级、教室管理
 
-import { getIfClassRoom,deleteClass,getsubject,addClass,getStudent,UpdateClass } from '@/api/StudentClassClassroomManagement'
+import { getIfClassRoom,deleteClass,getsubject,addClass,UpdateClass } from '@/api/StudentClassClassroomManagement'
 
 const state = {
     classRoomList:[], //全部班级数据
@@ -37,8 +37,8 @@ const actions = {
     // 添加班级
     await addClass(paylody)
   },
-  // 更新教室 3个id
   async UpdateClass({commit},palody){
+    // 更新教室 3个id
     await UpdateClass(palody)
   }
 }

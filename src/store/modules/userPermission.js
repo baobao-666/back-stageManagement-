@@ -1,8 +1,8 @@
 // 用户权限接口文档
-import {getuser,getList,getidentity,getviews,getapi,getidentity_api,getidentity_view} from '@/api/userList'
+import {getList,getidentity,getviews,getapi,getidentity_api,getidentity_view} from '@/api/userList'
 import { param } from '@/utils'
 const state = {
-user:[],//添加用户
+
 userList:[],//展示用户数据
 identity:[],//身份数据
 views:[],//视图接口权限
@@ -14,11 +14,7 @@ view_id:[],//身份和视图权限关系
 }
 
 const mutations = {
-  // 添加用户
-getuserList(state,payload){
-  state.user=payload
-
-},
+  
 //展示用户数据
 getuser(state,payload){
   state.userList=payload
@@ -48,11 +44,7 @@ state.view_id=payload
 }
 
 const actions = {
-async getuser({commit},payload){
-let res=await getuser(payload)
-//console.log(res.data)
-commit('getuserList',res)
-},
+
 // 
 async getList({commit},payload){
 let res=await getList(payload)
