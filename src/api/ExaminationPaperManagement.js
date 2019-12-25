@@ -18,7 +18,6 @@ export function getSubject() {
 }
 
 // 创建试卷接口
-// export const addExaminationPaperManagement = ({params}) => request.post('/exam/new', console.log(params) )
 export function addExaminationPaperManagement(payload) {
   console.log(payload,"....payload")
   return request({

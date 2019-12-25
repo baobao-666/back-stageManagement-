@@ -1,11 +1,12 @@
 // 考试试卷管理
-import { getexamType, getSubject, addExaminationPaperManagement, getExaminationPaperManagement } from '@/api/ExaminationPaperManagement'
+import { getexamType, getSubject, addExaminationPaperManagement, getExaminationPaperManagement, deleteExaminationPaperManagementTeacher } from '@/api/ExaminationPaperManagement'
 
 const state = {
   typeList: [],//所有考试类型
   subjectList: [],//所有课程
   addList: [],//创建
   paperList: [],//所有试卷
+  deleList: []
 }
 
 const mutations = {
@@ -23,6 +24,9 @@ const mutations = {
   getPaper(state, payload) {
     state.paperList = payload
   },
+  delePaper(state, payload) {
+    state.deleList = payload
+  }
 }
 
 const actions = {
@@ -48,6 +52,11 @@ const actions = {
     let res = await getExaminationPaperManagement()
     console.log('sssss', res)
     commit('getPaper', res)
+  },
+  // 删除试卷列表
+  async deleteExaminationPaperManagementTeacher({ commit }) {
+    let res = await deleteExaminationPaperManagementTeacher()
+    commit('delePaper',res.data)
   }
 }
 
