@@ -30,7 +30,7 @@
   </div>
 </template>
 <script>
-import { mapActions, mapState } from "vuex";
+
 import AddList from "@/views/exs/userList/addList";
 import ApiList from "@/views/exs/userList/apiList";
 import Userapi from "@/views/exs/userList/userapi";
@@ -60,10 +60,7 @@ export default {
     };
   },
   computed: {
-    ...mapState({
-      user: state => state.user,
-      
-    })
+   
   },
   methods: {
     tab(index) {
@@ -76,17 +73,12 @@ export default {
         this.showlist = false;
       }
     },
-    ...mapActions({
-      addUserList: "userPermission/getuser",
-     
-    })
+    
+    
   },
   created() {
-    let obj = {
-      user_name: "zhangdongming",
-      user_pwd: "Zhangdongming123!"
-    };
-    this.addUserList(obj);
+   
+   
    
   }
 };
