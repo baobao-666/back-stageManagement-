@@ -77,14 +77,14 @@ export default {
     ...mapState({
       typeList: state => state.ExaminationPaperManagement.typeList,
       subjectList: state => state.ExaminationPaperManagement.subjectList,
-      AddList: state => state.ExaminationPaperManagement.AddList
+      addList: state => state.ExaminationPaperManagement.addList
     })
   },
   methods: {
     ...mapActions({
       getexamType: "ExaminationPaperManagement/getexamType",
       getSubject: "ExaminationPaperManagement/getSubject",
-      addExaminationPaperManagement:"ExaminationPaperManagement/addExaminationPaperManagement"
+      addExaminationPaperManagement:"ExaminationPaperManagement/addExaminationPaperManagement",
     }),
     submit() {
       // console.log(this.form.start_time=+this.form.start_time,this.form.end_time=+this.form.end_time);
@@ -92,11 +92,12 @@ export default {
         subject_id: this.subject_id,
         exam_id: this.exam_id,
         title: this.title,
+        number:this.number,
         start_time: this.start_time * 1,
         end_time: this.end_time * 1
       };
-      localStorage.setItem("info", JSON.stringify(form));
       this.addExaminationPaperManagement(form);
+      localStorage.setItem("info",JSON.stringify(this.addList) )
       this.$router.push("/Addexam/Addedit");
     }
   },
