@@ -294,6 +294,15 @@ export const asyncRoutes = [
         meta: {
           title: '编辑试题',
         },
+      },
+      {
+        path: 'detail',
+        hidden:true,
+        component: () => import('@/views/test-questions/detail'),
+        name: 'Test-detail',
+        meta: {
+          title: '试题详情',
+        },
       }
     ]
   },

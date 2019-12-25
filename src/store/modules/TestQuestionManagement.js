@@ -5,7 +5,9 @@ import {
   getTopicQuestionsType,        // 题目类型数据
   addTestQuestions,              //添加试题
   getTestQuestions,               // 所有试题
-  getSearchTestQuestions          // 查询数据
+  getSearchTestQuestions,          // 查询数据
+  UpdateTestQuestions ,            // 更新试题
+  addTestQuestionsType            // 添加试题类型
 } from '@/api/TestQuestionManagement';
 
 import {
@@ -54,28 +56,24 @@ const actions = {
   // 考试类型数据
   async getTestQuestionsType({commit}){
     let res =await getTestQuestionsType();
-    console.log('考试类型',res);
     commit('getClassifyList',res.data)
   },
 
   // 课程类型数据
   async getCourseType({commit}){
     let res =await getCourseType();
-    console.log('课程',res);
     commit('getCourseList',res.data)
   },
 
   // 题目类型数据
   async getTopicQuestionsType({commit}){
     let res =await getTopicQuestionsType();
-    console.log('题目',res);
     commit('getTopicList',res.data)
   },
 
   // 获取当前用户信息  
   async getUserAddress({commit}){
     let res =await getUserAddress();
-    console.log('user',res);
     commit('setUserAddress',res.data)
   },
 
@@ -87,7 +85,6 @@ const actions = {
   // 所有试题
   async getTestQuestions({commit},payload){
    let res= await getTestQuestions(payload);
-    console.log('试题',res)
     commit('setTestQuestions',res.data)
  },
 
@@ -103,11 +100,19 @@ const actions = {
     if(payload.exam_id){
       params.exam_id=payload.exam_id
     }
-    console.log('params',params)
     let res= await getSearchTestQuestions(params);
-     console.log('查询',res)
      commit('setTestQuestions',res.data)
   },
+
+  // 更新试题
+  async UpdateTestQuestions({commit},payload){
+    await UpdateTestQuestions(payload);
+ },
+
+ // 添加试题类型
+  async addTestQuestionsType({commit},payload){
+    await addTestQuestionsType(payload);
+  }
   
 }
 
