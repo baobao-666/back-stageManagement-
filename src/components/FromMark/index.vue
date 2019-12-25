@@ -8,15 +8,15 @@
            <div class="from-main">
             <!-- 提价表单 -->
             <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
-                    <el-form-item  label="班级名" prop="name"></el-form-item>
-                       <el-input v-model="ruleForm.class"></el-input>
+                    <el-form-item  label="班级名"   prop="name"></el-form-item>
+                       <el-input :disabled="AddorSet" v-model="ruleForm.class"></el-input>
                     <el-form-item   label="教室号" prop="name"></el-form-item>
                        <el-select v-model="ruleForm.classroom" style="width:100%"  placeholder="请选择教室号">
-                        <el-option style="z-index:2500" v-for="(item,index) in AllClassRoom" :key="index" :label="item.room_text" :value="item.room_text"></el-option>
+                        <el-option style="z-index:2500" v-for="(item,index) in AllClassRoom" :key="index" :label="item.room_text" :value="item.room_id"></el-option>
                        </el-select>                                      
                     <el-form-item   label="课程名" prop="name"></el-form-item>
                        <el-select v-model="ruleForm.subject" style="width:100%"  placeholder="请选择课程名">
-                         <el-option style="z-index:2500" v-for="(item,index) in Allsubject" :key="index" :label="item.subject_text" :value="item.subject_text"></el-option>
+                         <el-option style="z-index:2500" v-for="(item,index) in Allsubject" :key="index" :label="item.subject_text" :value="item.subject_id"></el-option>
                        </el-select>
             </el-form>
             <!-- 提价表单 -->
@@ -49,51 +49,77 @@ export default {
             { required: true, message: '请选择活动区域', trigger: 'change' }
           ]
         },
-        AddorSet:0
+        AddorSet:false
     }
   },
   computed:{
     ...mapState({
-      AllClassRoom:state=>state.StudentClassClassroomManagement.AllClassRoom,
+      AllClassRoom:state=>state.setClass.AllClassRoom,
       Allsubject:state=>state.StudentClassClassroomManagement.Allsubject,
     })
   },
   methods:{
     ...mapActions({
-        addStoreClass:"StudentClassClassroomManagement/addClass"
+        addStoreClass:"StudentClassClassroomManagement/addClass",
+        getIfClassRoom:"StudentClassClassroomManagement/getIfClassRoom",
+        UpdateClass:"StudentClassClassroomManagement/UpdateClass"
     }),
     heidenFlag(){
       // 箭头关闭
       this.$emit("update:FromFlag",false)
+      if(this.AddorSet){
+         this.clearLocal()
+      }
     },
     hideenFlag(){
       // 取消按钮关闭
        this.$emit("update:FromFlag",false)
+       if(this.AddorSet){
+          this.clearLocal()
+       }
     },
     addClass(){
       // 添加教室数据
-      if(this.AddorSet===1){
-    
-      }else{
-      this.addStoreClass({
-        grade_name:this.ruleForm.class,
-        room_id:this.ruleForm.classroom,
-        subject_id:this.ruleForm.subject
-      })
+      if(!this.AddorSet){
+         this.addStoreClass({
+          grade_name:this.ruleForm.class,
+          room_id:this.ruleForm.classroom,
+          subject_id:this.ruleForm.subject
+        }).then(res=>{
+            this.getIfClassRoom()
+            this.$emit("update:FromFlag",false)
+        })
+      }else{  
+        this.UpdateClass({
+           grade_id:localStorage.getItem("grade_id"),
+           room_id:this.ruleForm.classroom,
+           subject_id:this.ruleForm.subject
+        }).then(res=>{
+         this.getIfClassRoom()
+         this.clearLocal()    
+         this.$emit("update:FromFlag",false)
+        })
       }
-    
-      this.$emit("update:FromFlag",false)
     },
     setruleForm(){
       if(localStorage.getItem('grade_name')&&localStorage.getItem('subject_text')&&localStorage.getItem('room_text')){
           this.ruleForm.class=localStorage.getItem('grade_name')
           this.ruleForm.classroom=localStorage.getItem('room_text')
           this.ruleForm.subject=localStorage.getItem('subject_text')
-          this.AddorSet=1
+          this.AddorSet = true
+      }else{
+        this.AddorSet = false
       }
+    },
+    clearLocal(){
+        localStorage.removeItem("grade_name")
+        localStorage.removeItem("room_text")
+        localStorage.removeItem("subject_text")
+        localStorage.removeItem("grade_id")
     }
   },
   created(){
+    // 判断是添加还是编辑
     this.setruleForm()
   }
 }
@@ -106,7 +132,7 @@ export default {
   right: 0;
   bottom: 0;
   z-index: 2000;
-  padding: 15% 35% 0;
+  padding: 15% 25% 0;
   background: rgba($color: #000000, $alpha: .5)
   }
   .mark_from{
@@ -123,7 +149,7 @@ export default {
     }
   }
   .from-main{
-    padding: 0 20px;
+    padding: 0 50px;
   }
   .from-footer{
     width: 100%;

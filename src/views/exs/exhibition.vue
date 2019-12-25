@@ -12,7 +12,7 @@
     </div>
 </template>
 <script>
-import UserDisplay from '@/components/Userdisplay/userdisplay'
+import UserDisplay from './userdisplay'
 export default {
     props:{
 

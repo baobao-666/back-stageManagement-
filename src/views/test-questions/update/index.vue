@@ -75,8 +75,9 @@ export default {
         exam: "", // 考试类型
         subject: "", //课程类型
         topic: "", //题目类型
-        answer: "" // 答案信息
-      }
+        answer: "" ,// 答案信息
+      },
+      questions_id:this.$route.query.id  // 试题ID
     };
   },
   computed: {
@@ -87,8 +88,6 @@ export default {
       courseList: state => state.TestQuestionManagement.courseList,
       // 题目类型的数据
       topicList: state => state.TestQuestionManagement.topicList,
-      // 当前用户信息
-      userAddress: state => state.TestQuestionManagement.userAddress
     })
   },
   methods: {
@@ -99,56 +98,55 @@ export default {
       getCourseType: "TestQuestionManagement/getCourseType",
       // 调用题目类型接口
       getTopicQuestionsType: "TestQuestionManagement/getTopicQuestionsType",
-      //添加试题接口
-      addTestQuestions: "TestQuestionManagement/addTestQuestions",
-      // 当前用户信息接口
-      getUserAddress: "TestQuestionManagement/getUserAddress"
+      //更新试题
+      UpdateTestQuestions: "TestQuestionManagement/UpdateTestQuestions",
     }),
     submit() {
-      // 要添加的类型数据  所需试题信息
+      // 要修改的类型数据  所需试题信息
       let questions_stem = this.form.name, //题干
-        title = this.form.desc, // 主题
-        exam_id = this.form.exam, // 考试类型
-        subject_id = this.form.subject, //课程类型
-        questions_type_id = this.form.topic, //题目类型
-        questions_answer = this.form.answer, // 答案信息
-        user_id = this.userAddress.user_id; // 用户Id
+          title = this.form.desc, // 主题
+          exam_id = this.form.exam, // 考试类型
+          subject_id = this.form.subject, //课程类型
+          questions_type_id = this.form.topic, //题目类型
+          questions_answer = this.form.answer, // 答案信息
+          questions_id=this.questions_id      //试题ID
       if (
+        // questions_id &&
         questions_type_id &&
         questions_stem &&
         subject_id &&
         exam_id &&
-        user_id &&
         questions_answer &&
         title
       ) {
-        this.$confirm("你确定要添加这道试题吗文, 是否继续?", "提示", {
+        this.$confirm("你确定要修改这道试题吗文, 是否继续?", "提示", {
           confirmButtonText: "确定",
           cancelButtonText: "取消",
           type: "warning"
         }).then(() => {
-            // 添加试题接口
-            this.addTestQuestions({
+            // 更新试题接口
+            this.UpdateTestQuestions({
+              questions_id,
               questions_type_id,
               questions_stem,
               subject_id,
               exam_id,
-              user_id,
               questions_answer,
               title
             });
             this.$message({
               type: "success",
-              message: "添加成功!"
+              message: "修改成功!"
             });
+            // this.$router.push('/examine')
           }).catch(() => {
             this.$message({
               type: "info",
-              message: "已取消添加"
+              message: "已取消修改"
             });
           });
       } else {
-        alert("请完整填写信息！");
+        alert("请完整填写要修改的信息！");
       }
     }
   },
@@ -159,9 +157,6 @@ export default {
     this.getCourseType();
     // 调用题目类型接口
     this.getTopicQuestionsType();
-
-    // 调用当前用户信息
-    this.getUserAddress();
   },
   mounted() {}
 };

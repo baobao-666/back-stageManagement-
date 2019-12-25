@@ -1,81 +1,68 @@
 <template>
-    <div class="list">
-         
-            <div>
-            <el-select v-model="value" placeholder="请选择身份id">
-              <el-option
-                v-for="item in options"
-                :key="item.value"
-                :label="item.label"
-                :value="item.value"
-              ></el-option>
-            </el-select>
-          </div>
-           <!-- input -->
-          <div class="addUser_input">
-            <input type="text" placeholder="请输入用户名" />
-          </div>
-          <div class="addUser_input">
-            <input type="password" placeholder="请输入密码" />
-          </div>
-          <!-- 下拉框 -->
-          <div>
-            <el-select v-model="value" placeholder="请选择身份id">
-              <el-option
-                v-for="item in options"
-                :key="item.value"
-                :label="item.label"
-                :value="item.value"
-              ></el-option>
-            </el-select>
-          </div>
-          <!-- 按钮 -->
-          <div class="addUser_input">
-            <button class="bun">确定</button>
-            <button class="reset">重置</button>
-          </div>
-        </div>
+  <div class="list">
+    <div>
+      <el-select v-model="values" placeholder="请选择身份id">
+        <el-option
+          v-for="item in userlist"
+          :key="item.user_id"
+          :label="item.user_name"
+          :value="item.user_name"
+        ></el-option>
+      </el-select>
+    </div>
+    <!-- input -->
+    <div class="addUser_input">
+      <input type="text" placeholder="请输入用户名" />
+    </div>
+    <div class="addUser_input">
+      <input type="password" placeholder="请输入密码" />
+    </div>
+    <!-- 下拉框 -->
+    <div>
+      <el-select v-model="value" placeholder="请选择身份id">
+        <el-option
+          v-for="item in identity"
+          :key="item.identity_id"
+          :label="item.identity_text"
+          :value="item.identity_text"
+        ></el-option>
+      </el-select>
+    </div>
+    <!-- 按钮 -->
+    <div class="addUser_input">
+      <button class="bun">确定</button>
+      <button class="reset">重置</button>
+    </div>
+  </div>
 </template>
 <script>
+import { mapState, mapActions } from "vuex";
 export default {
-    props:{
-
-    },
-    components:{
-
-    },
-    data(){
-        return {
- options: [
-        {
-          value: "选项1",
-          label: "管理者"
-        },
-        {
-          value: "选项2",
-          label: "出题者"
-        },
-        {
-          value: "选项3",
-          label: "浏览者"
-        }
-      ],
-      value: ""
-        }
-    },
-    computed:{
-
-    },
-    methods:{
-
-    },
-    created(){
-
-    },
-    mounted(){
-
-    }
-}
+  props: {},
+  components: {},
+  data() {
+    return {
+      value: "",
+      values: ""
+    };
+  },
+  computed: {
+    ...mapState({
+      identity: state => state.userPermission.identity,
+      userlist: state => state.userPermission.userList
+    })
+  },
+  methods: {
+    ...mapActions({
+      getidentity: "userPermission/getidentity",
+      getList: "userPermission/getList"
+    })
+  },
+  created() {
+    this.getidentity();
+    this.getList();
+  }
+};
 </script>
 <style scoped lang="scss">
 .addUser_input {
@@ -92,6 +79,7 @@ export default {
 ::-webkit-input-placeholder {
   color: #ccc;
   font-size: 14px;
+  padding: 0 10px;
 }
 .addUser_input button {
   height: 30px;
@@ -115,6 +103,7 @@ export default {
   border-radius: 4px;
   border: 0;
   font-size: 14px;
+  background: #fff;
   color: #000;
   border: 1px solid #ccc;
 }

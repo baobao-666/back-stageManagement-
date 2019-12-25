@@ -4,43 +4,39 @@
         <el-header>
             <el-input  class="input" v-model="input"  style="width:180px" placeholder="输入学生姓名"></el-input>
             <el-select class="input" v-model="ruleForm.classroom" style="width:180px"  placeholder="请选择教室号">
-            <!-- <el-option style="z-index:2500" v-for="(item,index) in AllClassRoom" :key="index" :label="item.room_text" :value="item.room_text"></el-option> -->
+            <el-option style="z-index:2500" v-for="(item,index) in AllClassRoom" :key="index" :label="item.room_text" :value="item.room_id"></el-option>
             </el-select>                                      
-            <el-select class="input" v-model="ruleForm.classroom" style="width:180px"  placeholder="班级号">
-            <!-- <el-option style="z-index:2500" v-for="(item,index) in AllClassRoom" :key="index" :label="item.room_text" :value="item.room_text"></el-option> -->
+            <el-select class="input" v-model="ruleForm.subject" style="width:180px"  placeholder="班级号">
+            <el-option style="z-index:2500" v-for="(item,index) in Allsubject" :key="index" :label="item.subject_text" :value="item.subject_id"></el-option>
             </el-select>                                      
-            <el-button class="el-btn" type="primary">搜索</el-button>
-            <el-button class="el-btn" type="primary">重置</el-button>
+            <el-button @click="search" class="el-btn" type="primary">搜索</el-button>
+            <el-button @click="resolve" class="el-btn" type="primary">重置</el-button>
         </el-header>
         <el-main>
           <!-- 表格 -->
                 <el-table
-                 :data="classRoomList"
+                 :data="pageList"
                  style="width: 100%">
                  <el-table-column
-                   prop="grade_name"
-                   label="姓名"
-                   width="180">
+                   prop="student_name"
+                   label="姓名">
                  </el-table-column>
                  <el-table-column
-                   prop="subject_text"
+                   prop="student_id"
                    label="学号"
-                   width="180">
+                   width="250">
                  </el-table-column>
                  <el-table-column
                    prop="subject_text"
-                   label="班级"
-                   width="180">
+                   label="班级">
                  </el-table-column>
                  <el-table-column
-                   prop="subject_text"
-                   label="教室"
-                   width="180">
+                   prop="room_text"
+                   label="教室">
                  </el-table-column>
                  <el-table-column
-                   prop="subject_text"
-                   label="密码"
-                   width="180">
+                   prop="student_pwd"
+                   label="密码">
                  </el-table-column>
                  <!-- 操作 -->
                  <el-table-column label="操作">
@@ -55,46 +51,72 @@
                   <el-pagination
                   @size-change="handleSizeChange"
                   @current-change="handleCurrentChange"
-                  :current-page="currentPage4"
-                  :page-sizes="[100, 200, 300, 400]"
-                  :page-size="100"
+                  :page-sizes="AllPage"
                   layout="total, sizes, prev, pager, next, jumper"
-                  :total="400">
+                  :total="AllStatude.length">
                   </el-pagination>
                 <!-- 分页 -->
-
-
-
-
-        </el-main>
+        </el-main> 
     </el-container>
 </template>
 
 <script>
-import { mapState, mapActions } from 'vuex'
+import { mapState, mapActions, mapMutations } from 'vuex'
 
 export default {
     data(){
         return {
             ruleForm:{
-             classroom:""
+             classroom:"",
+             subject:""
             },
             input:"",
-            currentPage4: 4
+            AllPage:[10, 20, 30, 40]
         }
     },
     computed:{
         ...mapState({
-            Allstudent: state=>state.StudentClassClassroomManagement.Allstudent
+            AllStatude: state=>state.setStatude.AllStatude,
+            pageList: state=>state.setStatude.pageList,
+            AllClassRoom:state=>state.setClass.AllClassRoom,
+            Allsubject:state=>state.StudentClassClassroomManagement.Allsubject
         })
     },
     methods:{
         ...mapActions({
-           getStudent:"StudentClassClassroomManagement/getStudent"
-        })
+           getStatude:"setStatude/getStatude",
+           deleteStatude:"setStatude/deleteStatude",
+           getsubject:"StudentClassClassroomManagement/getsubject", 
+           getAllClassRoom:"setClass/getAllClassRoom"   
+        }),
+        ...mapMutations({
+           setPage:"setStatude/setPage",
+           setPageSize:"setStatude/setPageSize"
+        }),
+        handleDelete(index,item){
+            console.log(item);
+            this.deleteStatude(item.student_id)
+        },
+        handleSizeChange(val) {
+        this.setPageSize(val)
+        },
+        handleCurrentChange(val) {
+          this.setPage(val)
+        },
+        search(){
+          
+        },
+        resolve(){
+          this.ruleForm.classroom=""
+          this.ruleForm.subject=""
+          this.input=""
+        }
+
     },
     created(){
-        this.getStudent()
+        this.getStatude()
+        this.getsubject()
+        this.getAllClassRoom()
     }
 }
 </script>

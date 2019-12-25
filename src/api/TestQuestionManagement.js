@@ -9,7 +9,7 @@ export const addTestQuestions=(params)=>request.post('/exam/questions',{question
 export const getTestQuestions=()=>request.get('/exam/questions/new') 
 
 // 更新试题
-export const UpdateTestQuestions=()=>request.put('/exam/questions/update',{questions_type_id:params.questions_type_id,subject_id:params.subject_id,questions_stem:params.questions_stem,exam_id:params.exam_id,user_id:params.user_id,questions_answer:params.questions_answer,title:params.title}) 
+export const UpdateTestQuestions=(params)=>request.put('/exam/questions/update',{questions_type_id:params.questions_type_id,subject_id:params.subject_id,questions_stem:params.questions_stem,exam_id:params.exam_id,user_id:params.user_id,questions_answer:params.questions_answer,title:params.title}) 
 
 // 获取所有的考试类型
 export const getTestQuestionsType=(params)=>request.get('/exam/examType',{params}) 
@@ -27,4 +27,4 @@ export const addTestQuestionsType = (params) => request.get('/exam/insertQuestio
 export const getTopicQuestionsType = () => request.get('/exam/getQuestionsType')
 
 // 按条件获取试题
-// export const getTestQuestionsType = (params) => request.get('/exam/questions/condition',{questions_id:params.questions_id,questions_type_id:params.questions_type_id,subject_id:params.subject_id,exam_id:params.exam_id})
+export const getSearchTestQuestions = (params) => request.get('/exam/questions/condition',{params})
