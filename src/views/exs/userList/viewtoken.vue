@@ -7,12 +7,12 @@
       <div class="list">
         <!-- xiala -->
         <div>
-          <el-select v-model="data" placeholder="请选择已有视口" @change="userapi" >
+          <el-select v-model="data" placeholder="请选择已有视口"  >
             <el-option
               v-for="(item,index) in getview"
               :key="index"
               :label="item.view_authority_text"
-              :value="item.view_authority_id"
+              :value="[item.view_authority_id,item.view_authority_text]"
             ></el-option>
           </el-select>
         </div>
@@ -27,6 +27,7 @@
 </template>
 <script>
 import { mapState, mapActions } from "vuex";
+import { log } from 'util';
 export default {
   props: {},
   components: {},
@@ -45,19 +46,11 @@ export default {
       getviews: "userPermission/getviews",
       addViewId:"setUser/addViewId"
     }),
-    userapi(e){
-   console.log('====================================');
-   console.log(e.target);
-   console.log('====================================');
-    },
     submit(){
-      console.log('====================================');
-      console.log(this.data);
-      console.log('====================================');
-        // this.addViewId({
-        //  view_authority_text:this.data.view_authority_text,
-        //  view_id:this.data.view_id
-        // })
+        this.addViewId({
+         view_authority_text:this.data[1],
+         view_id:this.data[0]
+        })
     },
     reset(){
       this.data = ""

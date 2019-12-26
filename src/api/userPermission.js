@@ -22,6 +22,8 @@ export const  addApiId =(params)=> request.get('/user/authorityApi/edit',{params
 export const  addUserApiId =(params)=> request.get('/user/identity/edit',{params})
 
 
+
+
 // 登录接口
 export const  loginUser =(params)=> request.post('/user/login',{user_name:params.user_name,user_pwd:params.user_pwd})
 

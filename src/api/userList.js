@@ -49,3 +49,19 @@ return request({
      method:'get'
    })
  }
+ //给身份设定api接口权限
+ export function setIdentity_api(data){
+   return request({
+     url:'/user/setIdentityApi',
+     method:'post',
+     data
+   })
+ }
+ //给身份设定视图权限
+ export function setIdentity_view(data){
+   return request({
+     url:'/user/setIdentityView',
+     method:'post',
+     data
+   })
+ }

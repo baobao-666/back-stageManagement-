@@ -11,7 +11,7 @@
               v-for="item in identity"
           :key="item.identity_id"
           :label="item.identity_text"
-          :value="item.identity_text"
+          :value="item.identity_id"
             ></el-option>
           </el-select>
         </div>
@@ -21,15 +21,15 @@
               v-for="item in api"
               :key="item.api_authority_id"
               :label="item.api_authority_text"
-              :value="item.api_authority_text"
+              :value="item.api_authority_id"
             ></el-option>
           </el-select>
         </div>
 
         <!-- 按钮 -->
         <div class="addUser_input">
-          <button class="bun">确定</button>
-          <button class="reset">重置</button>
+          <button @click="submit"  class="bun">确定</button>
+          <button @click="reset"  class="reset">重置</button>
         </div>
       </div>
     </div>
@@ -55,8 +55,19 @@ export default {
   methods: {
     ...mapActions({
       getapi:'userPermission/getapi',
-      getidentity: "userPermission/getidentity"
-    })
+      getidentity: "userPermission/getidentity",
+      setIdentity_api:"setUser/setIdentity_api"
+    }),
+    submit(){
+      this.setIdentity_api({
+        identity_id:this.userid,
+        api_authority_id:this.list
+      })
+    },
+    reset(){
+      this.userid = "",
+      this.list = ""
+    }
   },
   created() {
     this.getapi(),
