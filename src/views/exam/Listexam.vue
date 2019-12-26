@@ -96,21 +96,20 @@ export default {
           user_name:item.user_name,
           start_time:item.start_time,
           end_time:item.end_time,
-         
+          exam_exam_id:item.exam_exam_id
         }
       })
     }
   },
   methods: {
-    handleEdit(index, row) {
-      console.log(index, row);
-    }, 
-
     ...mapActions({
       getexamType: "ExaminationPaperManagement/getexamType",
       getSubject: "ExaminationPaperManagement/getSubject",
       getExaminationPaperManagement:"ExaminationPaperManagement/getExaminationPaperManagement"
-    })
+    }),
+      handleEdit(index, row) {
+      this.$router.push(`/detail?id=${row.exam_exam_id}`)
+    }, 
   },
   created() {
     this.getExaminationPaperManagement();

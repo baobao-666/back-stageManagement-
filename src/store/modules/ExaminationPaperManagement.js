@@ -1,5 +1,5 @@
 // 考试试卷管理
-import { getexamType, getSubject, addExaminationPaperManagement, getExaminationPaperManagement, deleteExaminationPaperManagementTeacher,updateExaminationPaperManagement } from '@/api/ExaminationPaperManagement'
+import { getexamType, getSubject, addExaminationPaperManagement, getExaminationPaperManagement,getExaminationPaperManagementTeacher, deleteExaminationPaperManagementTeacher,updateExaminationPaperManagement } from '@/api/ExaminationPaperManagement'
 
 const state = {
   typeList: [],//所有考试类型
@@ -7,8 +7,7 @@ const state = {
   addList: [],//创建
   paperList: [],//所有试卷
   deleList: [],//删除之后的
-  pageNum:1,
-  limit:3
+  TeacherList:[]
 }
 
 const mutations = {
@@ -21,18 +20,23 @@ const mutations = {
   },
   getAddList(state, payload) {
     state.addList = payload
-    console.log(state.addList, "...addlist")
   },
   getPaper(state, payload) {
     state.paperList = payload
   },
   delePaper(state, payload) {
-    state.deleList = payload
+    const list = state.addList.questions;
+    state.addList.questions  = list.splice(payload ,1)
   },
-  deleteOne(state, payload){
-    let list = state.addList.questions
-    list.splice(payload,1)
-  }
+  // deleteOne(state, payload){
+  //   console.log(payload,'....payload')
+  //   console.log(state.addList,'....state.addList')
+  //   let list = state.addList.questions
+  //   deleList = list.splice(payload,1)
+  // }
+  getTeacher(state, payload) {
+    state.TeacherList = payload
+  },
 }
 
 const actions = {
@@ -51,7 +55,7 @@ const actions = {
   async addExaminationPaperManagement({ commit }, payload) {
     let res = await addExaminationPaperManagement(payload)
     sessionStorage.setItem('res',JSON.stringify(res))
-    console.log(res,'....res.data')
+    // console.log(res,'....res.data')
     commit('getAddList', res.data)
   },
   // 获取所有试卷列表
@@ -60,14 +64,21 @@ const actions = {
     commit('getPaper', res)
   },
   // 删除试卷列表
-  async deleteExaminationPaperManagementTeacher({ commit }) {
-    let res = await deleteExaminationPaperManagementTeacher();
-    commit('delePaper',res.data)
-  },
+  // async deleteExaminationPaperManagementTeacher({ commit }) {
+  //   let res = await deleteExaminationPaperManagementTeacher();
+  //   commit('delePaper',res.data)
+  // },
   // 更新试卷
   async updateExaminationPaperManagement({commit},payload){
     let res = await updateExaminationPaperManagement(payload);
-  }
+  },
+  //
+  async getExaminationPaperManagementTeacher({commit},payload){
+    let res = await getExaminationPaperManagementTeacher(payload);
+    console.log(res.data,'res>>>>>>>>>')
+    commit('getTeacher',res.data)
+  },
+
 }
 
 export default {

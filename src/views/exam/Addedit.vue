@@ -5,20 +5,21 @@
     </el-header>
     <el-main>
       <el-button>添加新题</el-button>
-      <div class="style-edit">
+      <div class="style-edit" v-if="dataList.questions.length">
         <h3>{{dataList.title}}</h3>
-        <p>考试时间：1小时30分钟 监考人:{{this.dataList.questions[0].user_name}} 开始考试时间：2018.9.10 10:00 阅卷人：刘于</p>
+        <p>考试时间：1小时30分钟 监考人:{{dataList.questions[0].user_name}} 开始考试时间：2018.9.10 10:00 阅卷人：刘于</p>
         <div class="edit-cont">
           <!-- 容器 -->
           <div class="item" v-for="(item,index) in dataList.questions" :key="index">
             <h4>{{item.title}}</h4>
             <p>{{item.questions_answer}}</p>
             <div>{{item.questions_stem}}</div>
-            <a href @click="delet(index)">删除</a>
+            <span @click="remove">删除</span>
           </div>
         </div>
         <el-button type="primary" @click="jump(dataList)">创建试题</el-button>
       </div>
+      <div v-else> where no three!!!</div>
     </el-main>
   </el-container>
 </template>
@@ -33,28 +34,24 @@ export default {
     };
   },
   computed: {
-    ...mapState({
-      delePaper: state => state.ExaminationPaperManagement.delePaper,
-      // addList:state=>state.ExaminationPaperManagement.addList
-    })
+  
   },
   methods: {
     ...mapActions({
-      deleteExaminationPaperManagementTeacher:"ExaminationPaperManagement/deleteExaminationPaperManagementTeacher",
       updateExaminationPaperManagement:"ExaminationPaperManagement/updateExaminationPaperManagement"
     }),
+    
     ...mapMutations({
-      deleteOne:"ExaminationPaperManagement/deleteOne",
+      delePaper:"ExaminationPaperManagement/delePaper",
     }),
-    delet(index) {
-      // this.deleteExaminationPaperManagementTeacher(index);
-      this.deleteOne(index)
+    remove(e) {
+      e.target.parentNode.parentNode.removeChild(e.target.parentNode)
     },
     jump(vl){
       let ids = vl.exam_exam_id;
       let a = JSON.stringify(ids)
       this.updateExaminationPaperManagement(a)
-      this.$router.push('/Listexam')
+      // this.$router.push('/Listexam')
     }
   },
   created() {
@@ -107,10 +104,17 @@ export default {
   flex-direction: column;
   position: relative;
 }
-.item > a {
+.item > span {
   position: absolute;
   top: 20px;
   right: 30px;
+  width: 50px;
+  height: 30px;
+  border:1px solid #ccc;
+  line-height: 30px;
+  text-align: center;
+  border-radius:20px;
+  color:red;
 }
 .cv{
   text-align: center;
