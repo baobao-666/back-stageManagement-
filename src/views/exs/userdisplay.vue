@@ -1,101 +1,185 @@
 <template>
   <div class="useradd">
-    <div class="tab">
-      <span
-        v-for="(item,index) in list"
-        :key="index"
-        :class="{active:curren==index}"
-        @click="Tab(index)"
-      >{{item}}</span>
-    </div>
-    <!-- 用户数据 -->
-    <NameList v-if="name" />
-    <!-- 身份数据 -->
-    <Shenfen v-if="shenfen" />
-    <!-- api接口权限 -->
-    <Apitoken v-if="api" />
-    <!-- 身份和api接口关系 -->
-    <Identity v-if="identity" />
-    <!-- 视图接口权限 -->
-    <ViewList v-if="viewList" />
-    <!-- 身份和视图权限关系 -->
-    <ViewToken v-if="viewToken" />
+    <el-tabs v-model="activeName2" type="border-card" @tab-click="handleClick">
+      <!-- 用户数据 -->
+      <el-tab-pane label="用户数据" name="first">
+        <div class="h1">
+          <p>用户数据</p>
+        </div>
+        <div class="token">
+          <el-table :data="userlisted" style="width: 100%">
+            <el-table-column prop="user_name" label="用户名" width="180"></el-table-column>
+            <el-table-column prop="user_pwd" label="密码" width="700"></el-table-column>
+            <el-table-column prop="identity_text" label="身份"></el-table-column>
+          </el-table>
+          <el-pagination
+            @size-change="handleSizeChange"
+            @current-change="handleCurrentChange"
+            :page-size="10"
+            layout="total, prev, pager, next"
+            :total="userlist.length"
+          ></el-pagination>
+        </div>
+      </el-tab-pane>
+
+      <!-- 身份数据 -->
+      <el-tab-pane label="身份数据" name="second">
+        <div class="h1">
+          <p>身份数据</p>
+        </div>
+        <div class="token">
+          <el-table :data="identity" style="width: 100%">
+            <el-table-column prop="identity_text" label="身份名称"></el-table-column>
+          </el-table>
+          <el-pagination
+            @size-change="handleSizeChange"
+            @current-change="handleCurrentChange"
+            :page-size="10"
+            layout="total, prev, pager, next"
+            :total="identity.length"
+          ></el-pagination>
+        </div>
+      </el-tab-pane>
+
+      <!-- api接口权限 -->
+      <el-tab-pane label="api接口权限" name="third">
+        <div class="h1">
+          <p>api接口权限</p>
+        </div>
+        <div class="token">
+          <el-table :data="apilisted" style="width: 100%">
+            <el-table-column prop="api_authority_text" label="api权限名称" width="420"></el-table-column>
+            <el-table-column prop="api_authority_url" label="api权限url" width="490"></el-table-column>
+            <el-table-column prop="api_authority_method" label="api权限方法"></el-table-column>
+          </el-table>
+          <el-pagination
+            @size-change="handleSizeChange"
+            @current-change="handleCurrentChange"
+            :page-size="10"
+            layout="total, prev, pager, next"
+            :total="apilist.length"
+          ></el-pagination>
+        </div>
+      </el-tab-pane>
+
+      <!-- 身份和api接口关系 -->
+      <el-tab-pane label="身份和api接口关系" name="fourth">
+        <div class="h1">
+          <p>身份和api接口关系</p>
+        </div>
+        <div class="token">
+          <el-table :data="apiIded" style="width: 100%">
+            <el-table-column prop="identity_text" label="身份名称" width="320"></el-table-column>
+            <el-table-column prop="api_authority_text" label="api权限名称" width="300"></el-table-column>
+            <el-table-column prop="api_authority_url" label="api权限url" width="360"></el-table-column>
+            <el-table-column prop="api_authority_method" label="api权限方法"></el-table-column>
+          </el-table>
+          <el-pagination
+            @size-change="handleSizeChange"
+            @current-change="handleCurrentChange"
+            :page-size="10"
+            layout="total, prev, pager, next"
+            :total=" apiId.length"
+          ></el-pagination>
+        </div>
+      </el-tab-pane>
+
+      <!-- 视图接口权限 -->
+      <el-tab-pane label="视图接口权限" name="list">
+        <div class="h1">
+          <p>视图接口权限</p>
+        </div>
+        <div class="token">
+          <el-table :data="getviewed" style="width: 100%">
+            <el-table-column prop="view_authority_text" label="视图权限名称" width="420"></el-table-column>
+            <el-table-column prop="view_id" label="视图id"></el-table-column>
+          </el-table>
+          <el-pagination
+            @size-change="handleSizeChange"
+            @current-change="handleCurrentChange"
+            :page-size="10"
+            layout="total, prev, pager, next"
+            :total="getview.length"
+          ></el-pagination>
+        </div>
+      </el-tab-pane>
+
+      <!-- 身份和权限关系 -->
+      <el-tab-pane label="身份和权限关系" name="data">
+        <div class="h1">
+          <p>身份和视图权限关系</p>
+        </div>
+        <div class="token">
+          <el-table :data="dataed" style="width: 100%">
+            <el-table-column prop="identity_text" label="身份" width="400"></el-table-column>
+            <el-table-column prop="view_authority_text" label="视图名称" width="350"></el-table-column>
+            <el-table-column prop="view_id" label="视图id"></el-table-column>
+          </el-table>
+          <el-pagination
+            @size-change="handleSizeChange"
+            @current-change="handleCurrentChange"
+            :page-size="10"
+            layout="total, prev, pager, next"
+            :total="data.length"
+          ></el-pagination>
+        </div>
+      </el-tab-pane>
+    </el-tabs>
   </div>
 </template>
 <script>
-import NameList from "./exhibition/nameList";
-import Shenfen from "./exhibition/shenfen";
-import Apitoken from "./exhibition/apitoken";
-import Identity from "./exhibition/identity";
-import ViewList from "./exhibition/viewlist";
-import ViewToken from "./exhibition/viewtoken";
+import { mapState, mapActions, mapMutations } from "vuex";
 export default {
-  props: {},
-  components: {
-    NameList,
-    Shenfen,
-    Apitoken,
-    Identity,
-    ViewList,
-    ViewToken
-  },
   data() {
     return {
-      list: [
-        "用户数据",
-        "身份数据",
-        "api接口数据",
-        "身份和api接口关系",
-        "视图接口权限",
-        "身份和视图权限关系"
-      ],
-      curren: 0,
-      name: true,
-      shenfen: false,
-      api: false,
-      identity: false,
-      viewList: false,
-      viewToken: false
+      activeName2: "first"
     };
   },
-  computed: {},
+  computed: {
+    ...mapState({
+      userlist: state => state.userPermission.userList,
+      userlisted: state => state.userPermission.userListed,
+      identity: state => state.userPermission.identity,
+      apilist: state => state.userPermission.api,
+      apilisted: state => state.userPermission.apied,
+      apiId: state => state.userPermission.identity_api,
+      apiIded: state => state.userPermission.identity_apied,
+      getview: state => state.userPermission.views,
+      getviewed: state => state.userPermission.viewsed,
+      data: state => state.userPermission.view_id,
+      dataed: state => state.userPermission.view_ided
+    })
+  },
   methods: {
-    Tab(index) {
-      this.curren = index;
-      if (this.curren === 0) {
-        this.name = true,
-          this.shenfen = false,
-          this.api = false,
-          this.identity = false,
-          this.viewList = false,
-          this.viewToken = false
-      } 
-      if (this.curren === 1) {
-        this.shenfen = true
-         this.name = false
-       
-      } 
-      if (this.curren === 2) {
-        this.api = true
-        this.shenfen = false
-       
-      } 
-      if (this.curren === 3) {
-        this.identity = true
-          this.api = false
-      } 
-      if (this.curren === 4) {
-        this.viewList =true,
-        this.identity=false
-      }
-      if(this.curren===5){
-        this.viewToken=true,
-        this.viewList=false
+    ...mapActions({
+      getList: "userPermission/getList",
+      getidentity: "userPermission/getidentity",
+      getapi: "userPermission/getapi",
+      getidentity_api: "userPermission/getidentity_api",
+      getviews: "userPermission/getviews",
+      getidentity_view: "userPermission/getidentity_view"
+    }),
+    ...mapMutations({
+      handleCurrent: "userPermission/handleCurrent",
+      handlePage: "userPermission/handlePage"
+    }),
+    handleClick(tab, event) {},
 
-      }
+    handleSizeChange(val) {
+      this.handlePage(val);
+    },
+    handleCurrentChange(val) {
+      this.handleCurrent(val);
     }
   },
-  created() {}
+  created() {
+    this.getList();
+    this.getidentity();
+    this.getapi();
+    this.getidentity_api();
+    this.getviews();
+    this.getidentity_view();
+  }
 };
 </script>
 <style scoped lang="scss">
