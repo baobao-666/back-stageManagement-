@@ -11,7 +11,7 @@
               v-for="item in identity"
               :key="item.identity_id"
               :label="item.identity_text"
-              :value="item.identity_text"
+              :value="item.identity_id"
             ></el-option>
           </el-select>
         </div>
@@ -21,14 +21,14 @@
               v-for="item in getview"
               :key="item.view_authority_id"
               :label="item.view_authority_text"
-              :value="item.view_authority_text"
+              :value="item.view_authority_id"
             ></el-option>
           </el-select>
         </div>
         <!-- 按钮 -->
         <div class="addUser_input">
-          <button class="bun">确定</button>
-          <button class="reset">重置</button>
+          <button @click="submit" class="bun">确定</button>
+          <button @click="reset" class="reset">重置</button>
         </div>
       </div>
     </div>
@@ -53,8 +53,19 @@ export default {
   },
   methods: {
     ...mapActions({
-      getviews: "userPermission/getviews"
-    })
+      getviews: "userPermission/getviews",
+      setIdentity_view:"setUser/setIdentity_view"
+    }),
+    submit(){
+       this.setIdentity_view({
+         identity_id:this.viewID,
+         view_authority_id:this.listid	
+       })
+    },
+    reset(){
+        this.viewID="",
+        this.listid=""
+    }
   },
   created() {
     this.getviews();

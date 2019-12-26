@@ -35,7 +35,6 @@ const actions = {
 async deleteStatude({commit},id){
    let res = await deleteStatude(id)
    console.log(res);
-   
 }
 }
 
