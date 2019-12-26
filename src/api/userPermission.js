@@ -4,7 +4,7 @@ import request from '@/utils/request'
 
 
 // 更新用户信息  
-export  const updateUserMess=(params)=>request.put('/user/user',{user_id:params.user_id,user_name:params.user_name,user_pwd:params.user_pwd,identity_id:params.identity_id,avatar:params.avatar})
+export  const updateUserMess=(data)=>request.put('/user/user',data)
 
 // 展示用户信息
 export const  showUserMess =(params)=>request.get('/user/identity',{params})
@@ -16,10 +16,10 @@ export const  showUserMessAndIP =()=>request.get('/user/identity_api_authority_r
 export const  addViewId =(params)=> request.get('/user/authorityView/edit',{params})
 
 // 添加api接口权限
-export const  addApiId =(params)=> request.get('/user//user/authorityApi/edit/edit',{params})
+export const  addApiId =(params)=> request.get('/user/authorityApi/edit',{params})
 
 // 给身份设定api接口权限
-export const  addUserApiId =(params)=> request.get('/user/setIdentityApi',{params})
+export const  addUserApiId =(params)=> request.get('/user/identity/edit',{params})
 
 
 // 登录接口

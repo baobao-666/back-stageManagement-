@@ -94,7 +94,6 @@ export default {
            setPageSize:"setStatude/setPageSize"
         }),
         handleDelete(index,item){
-            console.log(item);
             this.deleteStatude(item.student_id)
         },
         handleSizeChange(val) {

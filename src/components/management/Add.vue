@@ -2,17 +2,17 @@
   <div class="list">
     <!-- input -->
     <div class="addUser_input">
-      <input type="text" v-model="fromValue.adduser" placeholder="请输入用户名" />
+      <el-input type="text" v-model="fromValue.adduser"   placeholder="请输入用户名" />
     </div>
     <div class="addUser_input">
-      <input type="password" v-model="fromValue.pass" placeholder="请输入密码" />
+      <el-input type="password" v-model="fromValue.pass"  placeholder="请输入密码" />
     </div>
     <!-- 下拉框 -->
     <div>
       <el-select v-model="fromValue.idvalue" placeholder="请选择身份id">
         <el-option
-          v-for="item in identity"
-          :key="item"
+          v-for="(item,index) in identity"
+          :key="index"
           :label="item.identity_text"
           :value="item.identity_id"
         ></el-option>
@@ -28,7 +28,6 @@
 <script>
 import axios from 'axios'
 import { mapState, mapActions } from "vuex";
-import { log } from 'util';
 export default {
   props: {},
   components: {},
@@ -53,23 +52,21 @@ export default {
       getuser: "setUser/getuser"
     }),
     addUser(){
-    //  this.getuser({
-    //     user_name:this.fromValue.adduser,
-    //     user_pwd:this.fromValue.pass,
-    //     identity_id:this.fromValue.idvalue
-    //  })
-     axios.post('http://169.254.124.14:7002/user',{ user_name:this.fromValue.adduser,
+     this.getuser({
+        user_name:this.fromValue.adduser,
         user_pwd:this.fromValue.pass,
-        identity_id:this.fromValue.idvalue}).then(res=>{
-          console.log('====================================');
-          console.log(res);
-          console.log('====================================');
-        })
+        identity_id:this.fromValue.idvalue
+     })
+     window.sessionStorage.setItem("user_name",this.fromValue.adduser)
+     window.sessionStorage.setItem("user_psd",this.fromValue.pass)
     },
+
     resolve(){
      this.fromValue.adduser=""
      this.fromValue.pass=""
      this.fromValue.idvalue=""
+     window.sessionStorage.removeItem("user_name")
+     window.sessionStorage.removeItem("user_psd")
     },
   },
   created() {

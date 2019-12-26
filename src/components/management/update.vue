@@ -1,37 +1,37 @@
 <template>
   <div class="list">
     <div>
-      <el-select v-model="values" placeholder="请选择身份id">
+      <el-select v-model="getuser" placeholder="请选择身份id">
         <el-option
-          v-for="item in userlist"
-          :key="item.user_id"
+          v-for="(item,index) in userlist"
+          :key="index"
           :label="item.user_name"
-          :value="item.user_name"
+          :value="item.user_id"
         ></el-option>
       </el-select>
     </div>
     <!-- input -->
     <div class="addUser_input">
-      <input type="text" placeholder="请输入用户名" />
+      <el-input v-model="userName" type="text" placeholder="请输入用户名" />
     </div>
     <div class="addUser_input">
-      <input type="password" placeholder="请输入密码" />
+      <el-input v-model="userPass" type="password" placeholder="请输入密码" />
     </div>
     <!-- 下拉框 -->
     <div>
-      <el-select v-model="value" placeholder="请选择身份id">
+      <el-select v-model="userId" placeholder="请选择身份id">
         <el-option
-          v-for="item in identity"
-          :key="item.identity_id"
+          v-for="(item,index) in identity"
+          :key="index"
           :label="item.identity_text"
-          :value="item.identity_text"
+          :value="item.identity_id"
         ></el-option>
       </el-select>
     </div>
     <!-- 按钮 -->
     <div class="addUser_input">
-      <button class="bun">确定</button>
-      <button class="reset">重置</button>
+      <button @click="updateUser" class="bun">确定</button>
+      <button @click="reslove"  class="reset">重置</button>
     </div>
   </div>
 </template>
@@ -42,8 +42,10 @@ export default {
   components: {},
   data() {
     return {
-      value: "",
-      values: ""
+      getuser:"",
+      userName:sessionStorage.getItem("user_name"),
+      userPass:sessionStorage.getItem("user_psd"),
+      userId:""
     };
   },
   computed: {
@@ -55,8 +57,25 @@ export default {
   methods: {
     ...mapActions({
       getidentity: "userPermission/getidentity",
-      getList: "userPermission/getList"
-    })
+      getList: "userPermission/getList",
+      updateUserMess:"setUser/updateUserMess"
+    }),
+    reslove(){
+      this.userId="",
+      this.getuser= "",
+      this.userName="",
+      this.userPass="" 
+    },
+    updateUser(){
+      this.updateUserMess({
+         user_id:this.getuser,
+         user_name:this.userName,
+         user_pwd:this.userPass,
+         identity_id:this.userId
+      })
+     window.sessionStorage.removeItem("user_name")
+     window.sessionStorage.removeItem("user_psd")
+    }
   },
   created() {
     this.getidentity();
