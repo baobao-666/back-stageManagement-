@@ -7,28 +7,38 @@
     <div class="list">
       <!-- input -->
       <div class="addUser_input">
-        <input type="text" placeholder="添加身份名称" />
+        <el-input type="text" v-model="addUser" placeholder="添加身份名称" ></el-input>
       </div>
       <!-- 按钮 -->
       <div class="addUser_input">
-        <button class="bun">确定</button>
-        <button class="reset">重置</button>
+        <button  @click="submits" class="bun"  >确定</button>
+        <button  @click="reset" class="reset">重置</button>
       </div>
    
   </div>
   </div>
 </template>
 <script>
+import { mapActions } from 'vuex';
 export default {
-  props: {},
+
   components: {},
   data() {
-    return {};
+    return {
+      addUser:""
+    };
   },
-  computed: {},
-  methods: {},
-  created() {},
-  mounted() {}
+  methods: {
+    ...mapActions({
+      addUserApiId:"setUser/addUserApiId"
+    }),
+    submits(){
+      this.addUserApiId({identity_text:this.addUser})
+    },
+    reset(){
+      this.addUser=""
+    }
+  },
 };
 </script>
 <style scoped lang="scss">

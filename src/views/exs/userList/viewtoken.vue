@@ -7,19 +7,19 @@
       <div class="list">
         <!-- xiala -->
         <div>
-          <el-select v-model="data" placeholder="请选择已有视口">
+          <el-select v-model="data" placeholder="请选择已有视口" @change="userapi" >
             <el-option
-              v-for="item in getview"
-              :key="item.view_id"
+              v-for="(item,index) in getview"
+              :key="index"
               :label="item.view_authority_text"
-              :value="item.view_authority_text"
+              :value="item.view_authority_id"
             ></el-option>
           </el-select>
         </div>
         <!-- 按钮 -->
         <div class="addUser_input">
-          <button class="bun">确定</button>
-          <button class="reset">重置</button>
+          <button @click="submit" class="bun">确定</button>
+          <button @click="reset" class="reset">重置</button>
         </div>
       </div>
     </div>
@@ -42,8 +42,26 @@ export default {
   },
   methods: {
     ...mapActions({
-      getviews: "userPermission/getviews"
-    })
+      getviews: "userPermission/getviews",
+      addViewId:"setUser/addViewId"
+    }),
+    userapi(e){
+   console.log('====================================');
+   console.log(e.target);
+   console.log('====================================');
+    },
+    submit(){
+      console.log('====================================');
+      console.log(this.data);
+      console.log('====================================');
+        // this.addViewId({
+        //  view_authority_text:this.data.view_authority_text,
+        //  view_id:this.data.view_id
+        // })
+    },
+    reset(){
+      this.data = ""
+    }
   },
   created() {
     this.getviews();

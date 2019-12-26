@@ -11,12 +11,12 @@
               v-for="item in identity"
               :key="item.identity_id"
               :label="item.identity_text"
-              :name="item.identity_text"
+              :value="item.identity_text"
             ></el-option>
           </el-select>
         </div>
         <div class="el">
-          <el-select v-model="value" placeholder="请选择视图接口权限">
+          <el-select v-model="viewID" placeholder="请选择视图接口权限">
             <el-option
               v-for="item in getview"
               :key="item.view_authority_id"
@@ -41,7 +41,7 @@ export default {
   components: {},
   data() {
     return {
-      value: "",
+      viewID: "",
       listid: ""
     };
   },

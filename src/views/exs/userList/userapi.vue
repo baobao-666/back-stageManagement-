@@ -6,7 +6,7 @@
       </div>
       <div class="list">
         <div>
-          <el-select v-model="value" placeholder="请选择身份id">
+          <el-select v-model="userid" placeholder="请选择身份id">
             <el-option
               v-for="item in identity"
           :key="item.identity_id"
@@ -42,8 +42,7 @@ export default {
   components: {},
   data() {
     return {
-     
-      value: "",
+      userid: "",
       list:""
     };
   },
