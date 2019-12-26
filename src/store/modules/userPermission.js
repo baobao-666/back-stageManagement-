@@ -113,7 +113,7 @@ const actions = {
   // 
   async getList({ commit }, payload) {
     let res = await getList(payload)
-    console.log(res.data)
+    //console.log(res.data)
     commit('getuser', res.data)
   },
   // 
