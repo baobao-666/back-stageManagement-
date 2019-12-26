@@ -5,7 +5,9 @@ const state = {
   userList: [],//原展示用户数据
   userListed: [],//展示用户数据
   //
-  identity: [],//身份数据
+  identity: [],//原身份数据
+  identityed:[],//身份数据
+
   //
   views: [],//原视图接口权限
   viewsed: [],//视图接口权限
@@ -36,6 +38,7 @@ const mutations = {
   //获取身份ID
   getuserID(state, payload) {
     state.identity = payload
+    creadidentity(payload)
 
 
 
@@ -71,6 +74,8 @@ const mutations = {
     creadapi(state.api)
     creadidentity(state.identity_api)
     creadeided(state.view_id)
+    creadshen(state.identity)
+
 
 
   },
@@ -81,6 +86,7 @@ const mutations = {
     creadapi(state.api)
     creadidentity(state.identity_api)
     creadeided(state.view_id)
+    creadshen(state.identity)
 
   },
 }
@@ -98,6 +104,9 @@ function creadidentity(data) {
 }
 function creadeided(data) {
   state.view_ided = data.slice((state.currenpage - 1) * state.page, state.page * state.currenpage)
+}
+function creadshen(data){
+  state.identityed = data.slice((state.currenpage - 1) * state.page, state.page * state.currenpage)
 }
 
 const actions = {

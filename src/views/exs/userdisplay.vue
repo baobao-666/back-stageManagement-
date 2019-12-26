@@ -21,7 +21,6 @@
           ></el-pagination>
         </div>
       </el-tab-pane>
-
       <!-- 身份数据 -->
       <el-tab-pane label="身份数据" name="second">
         <div class="h1">
@@ -36,7 +35,7 @@
             @current-change="handleCurrentChange"
             :page-size="10"
             layout="total, prev, pager, next"
-            :total="identity.length"
+            :total="identityed.length"
           ></el-pagination>
         </div>
       </el-tab-pane>
@@ -147,7 +146,9 @@ export default {
       getview: state => state.userPermission.views,
       getviewed: state => state.userPermission.viewsed,
       data: state => state.userPermission.view_id,
-      dataed: state => state.userPermission.view_ided
+      dataed: state => state.userPermission.view_ided,
+      identityed:state=>state.userPermission.identityed
+
     })
   },
   methods: {
