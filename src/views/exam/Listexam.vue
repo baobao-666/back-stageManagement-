@@ -60,11 +60,10 @@
               </template>
             </el-table-column>
           </el-table>
-          <el-pagination background layout="prev, pager, next" :total="50"></el-pagination>
+          <!-- <el-pagination background layout="prev, pager, next" :total="50"></el-pagination> -->
         </div>
       </el-main>
     </el-container>
-    {{paperList}}
   </div>
 </template>
 <script>
@@ -106,9 +105,7 @@ export default {
     handleEdit(index, row) {
       console.log(index, row);
     }, 
-    handleDelete(index, row) {
-      console.log(index, row);
-    },
+
     ...mapActions({
       getexamType: "ExaminationPaperManagement/getexamType",
       getSubject: "ExaminationPaperManagement/getSubject",
