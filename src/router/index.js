@@ -567,6 +567,34 @@ export const asyncRoutes = [
   { path: '*', redirect: '/404', hidden: true }
 ]
 
+export const authorityRoutes = [
+  {
+    path:"/classroom",
+    component: Layout,
+    meta: { title: '班级管理', icon: 'documentation'},
+    children:[
+      {
+        path:"classmanagement",
+        component:()=>import('@/views/classRoom/classManagement/index'),
+        name:"classmanagement",
+        meta:{title:"班级管理",icon: 'dashboard', view_id: 'main-grade'}
+      },
+      {
+        path:"Classroommanagement",
+        component:()=>import('@/views/classRoom/ClassroomManagement/index'),
+        name:'Classroommanagement',
+        meta:{title:"教室管理",icon: 'dashboard', view_id: 'main-room'}
+      },
+      {
+        path:"studentManagement",
+        component:()=>import('@/views/classRoom/studentManagement/index'),
+        name:'studentManagement',
+        meta:{title:"学生管理",icon: 'dashboard', view_id: 'main-student'}
+      }
+    ]
+  }
+]
+
 const createRouter = () => new Router({
   // mode: 'history', // require service support
   scrollBehavior: () => ({ y: 0 }),
