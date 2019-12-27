@@ -106,6 +106,8 @@ const actions = {
 
   // 更新试题
   async UpdateTestQuestions({commit},payload){
+    // let data = payload
+    console.log('loasd',payload);
     await UpdateTestQuestions(payload);
  },
 
