@@ -75,7 +75,6 @@ const actions = {
   //
   async getExaminationPaperManagementTeacher({commit},payload){
     let res = await getExaminationPaperManagementTeacher(payload);
-    console.log(res.data,'res>>>>>>>>>')
     commit('getTeacher',res.data)
   },
 

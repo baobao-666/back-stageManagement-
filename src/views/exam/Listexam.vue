@@ -51,16 +51,11 @@
             <el-table-column label="结束时间" prop="end_time"></el-table-column>
             <el-table-column align="right">
               <template slot-scope="scope">
-                <el-button size="mini" @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
-                <!-- <el-button
-                  size="mini"
-                  type="danger"
-                  @click="handleDelete(scope.$index, scope.row)"
-                >Delete</el-button> -->
+                <el-button size="mini" @click="handleEdit(scope.$index, scope.row)">操作</el-button>
               </template>
             </el-table-column>
           </el-table>
-          <!-- <el-pagination background layout="prev, pager, next" :total="50"></el-pagination> -->
+
         </div>
       </el-main>
     </el-container>
@@ -83,12 +78,12 @@ export default {
     ...mapState({
       typeList: state => state.ExaminationPaperManagement.typeList,
       subjectList: state => state.ExaminationPaperManagement.subjectList,
+      // 试题列表
       paperList: state => state.ExaminationPaperManagement.paperList
     })
   },
   watch:{
     paperList(now){
-      console.log(now,'+++++++++++++')
       this.tableData = now.exam.map(item=>{
         return {
           title:item.title,

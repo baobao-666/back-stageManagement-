@@ -29,10 +29,16 @@ export function addExaminationPaperManagement(payload) {
 //  获取试卷列表接口
 export const getExaminationPaperManagement = (params) => request.get('/exam/exam', { params })
 
-
-
 //  更新试卷接口
-export const updateExaminationPaperManagement = (params) => request.put('/exam/exam/vjr0i-u0i0i1', { question_ids:params})
+export function updateExaminationPaperManagement(params) {
+  const {arr,data_id} = params;
+  console.log(JSON.stringify(arr),'params')
+  return request({
+    url: `/exam/exam/${data_id}`,
+    method: 'put',
+    data:{question_ids:JSON.stringify(arr)}
+  })
+}
 
 //  获取试卷详情（教师端）接口
 export const getExaminationPaperManagementTeacher = (id) => request.get(`/exam/exam/${id}`)

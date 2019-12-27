@@ -95,7 +95,6 @@ export default {
       addExaminationPaperManagement:"ExaminationPaperManagement/addExaminationPaperManagement"
     }),
     submit() {
-      // console.log(this.form.start_time=+this.form.start_time,this.form.end_time=+this.form.end_time);
       let form = {
         subject_id: this.subject_id,
         exam_id: this.exam_id,
@@ -104,16 +103,17 @@ export default {
         start_time: this.start_time * 1,
         end_time: this.end_time * 1
       };
+      if(this.subject_id!=''&&this.exam_id!=''&&this.title!=''&&this.number!=''&&this.start_time!=''&&this.end_time!=''){
         this.addExaminationPaperManagement(form);
         this.$router.push("/Addexam/Addedit"); 
+      }else{
+        alert('信息不完整')
+      }
     }
   },
   created() {
     this.getexamType(), 
     this.getSubject();
-    
-  },
-  mounted(){
     
   }
 };
