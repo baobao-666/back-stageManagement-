@@ -1,6 +1,6 @@
 
 
-import { login, logout, getInfo } from '@/api/user'
+import { login, logout, getInfo,getViewAuthority } from '@/api/user'
 import { getToken, setToken, removeToken } from '@/utils/auth'
 import router, { resetRouter } from '@/router'
 
@@ -9,7 +9,8 @@ const state = {
   name: '',
   avatar: '',
   introduction: '',
-  roles: []
+  roles: [],
+  viewAuthority:[]
 }
 
 const mutations = {
@@ -27,6 +28,9 @@ const mutations = {
   },
   SET_ROLES: (state, roles) => {
     state.roles = roles
+  },
+  SET_VIEWAUTHORITY: (state, viewAuthority) => {
+    state.viewAuthority = viewAuthority;
   }
 }
 
@@ -40,8 +44,22 @@ const actions = {
   },
 
   // get user info
-  getInfo({ commit, state }) {
-    return new Promise((resolve, reject) => {
+  async getInfo({ commit, state }) {
+   
+
+      let userInfo = await getInfo();
+           console.log('userInfo===============================');
+           console.log(userInfo);
+           console.log('====================================');
+      commit('SET_NAME', userInfo.data.user_name)
+      commit('SET_AVATAR', userInfo.data.avatar || 'https://jasonandjay.com/favicon.ico')
+
+      let viewAuthority = await getViewAuthority();
+      
+      console.log('ViewAuthority...',viewAuthority);
+      
+      commit('SET_VIEWAUTHORITY',viewAuthority.data)
+      return viewAuthority.data
       // getInfo(state.token).then(response => {
       //   const { data } = response
 
@@ -56,17 +74,17 @@ const actions = {
       //     reject('getInfo: roles must be a non-null array!')
       //   }
 
-      const roles = ['admin']
-      commit('SET_ROLES', roles)
+      // const roles = ['admin']
+      // commit('SET_ROLES', roles)
       // commit('SET_NAME', name)
       // commit('SET_AVATAR', avatar)
       // commit('SET_INTRODUCTION', introduction)
       // resolve(data)
-      resolve({roles});
+      // resolve({roles});
       // }).catch(error => {
       // reject(error)
       // })
-    })
+    
   },
 
   // user logout
