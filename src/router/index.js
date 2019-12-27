@@ -159,6 +159,11 @@ export const constantRoutes = [
         component: () => import('@/views/exam/Addedit'),
         name: 'Addedit',
       },
+      {
+        path: '/Detail',
+        component: () => import('@/views/exam/Detail'),
+        name: 'Detail',
+      }
     ]
   },
   
