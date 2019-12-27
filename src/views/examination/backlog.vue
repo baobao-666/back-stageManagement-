@@ -50,26 +50,6 @@ export default {
     data(){
         return {
             list:null,
-            tableData: [{
-                name: '1705B',
-                courseTitle: '实训一',
-                classroom:'34303'
-                }, 
-                {
-                name: '1705B',
-                courseTitle: '实训一',
-                classroom:'34303'
-                },
-                {
-                name: '1705B',
-                courseTitle: '实训一',
-                classroom:'34303'
-                }, 
-                {
-                name: '1705B',
-                courseTitle: '实训一',
-                classroom:'34303'
-                }]
         }
     },
     computed:{

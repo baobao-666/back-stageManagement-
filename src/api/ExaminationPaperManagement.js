@@ -19,7 +19,6 @@ export function getSubject() {
 
 // 创建试卷接口
 export function addExaminationPaperManagement(payload) {
-  console.log(payload,"....payload")
   return request({
     url: '/exam/exam',
     method: 'post',

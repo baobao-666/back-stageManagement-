@@ -1,7 +1,7 @@
 // 考试阅卷管理
 import {getIfClassRoom} from '@/api/StudentClassClassroomManagement'
 const state = {
-  examList:[]
+  examList:[]  // 分配好的教室数据
 }
 
 const mutations = {
