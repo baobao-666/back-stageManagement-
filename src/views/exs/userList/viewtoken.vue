@@ -7,7 +7,7 @@
       <div class="list">
         <!-- xiala -->
         <div>
-          <el-select v-model="data" placeholder="请选择已有视口"  >
+          <el-select v-model="data" placeholder="请选择已有视口">
             <el-option
               v-for="(item,index) in getview"
               :key="index"
@@ -27,11 +27,9 @@
 </template>
 <script>
 import { mapState, mapActions } from "vuex";
-import { log } from 'util';
+import { log } from "util";
 export default {
-  props: {},
-  components: {},
-  data() {
+ data() {
     return {
       data: ""
     };
@@ -44,16 +42,16 @@ export default {
   methods: {
     ...mapActions({
       getviews: "userPermission/getviews",
-      addViewId:"setUser/addViewId"
+      addViewId: "setUser/addViewId"
     }),
-    submit(){
-        this.addViewId({
-         view_authority_text:this.data[1],
-         view_id:this.data[0]
-        })
+    submit() {
+      this.addViewId({
+        view_authority_text: this.data[1],
+        view_id: this.data[0]
+      });
     },
-    reset(){
-      this.data = ""
+    reset() {
+      this.data = "";
     }
   },
   created() {
@@ -126,7 +124,7 @@ span {
   border: 0;
   font-size: 14px;
   color: #000;
-   background: #fff;
+  background: #fff;
   border: 1px solid #ccc;
 }
 .el {

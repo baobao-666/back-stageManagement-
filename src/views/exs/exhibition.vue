@@ -14,29 +14,9 @@
 <script>
 import UserDisplay from './userdisplay'
 export default {
-    props:{
-
-    },
-    components:{
+  components:{
 UserDisplay
     },
-    data(){
-        return {
-
-        }
-    },
-    computed:{
-
-    },
-    methods:{
-
-    },
-    created(){
-
-    },
-    mounted(){
-
-    }
 }
 </script>
 <style scoped lang="scss">

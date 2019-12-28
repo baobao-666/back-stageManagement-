@@ -38,9 +38,7 @@
 <script>
 import { mapState, mapActions } from "vuex";
 export default {
-  props: {},
-  components: {},
-  data() {
+ data() {
     return {
       getuser:"",
       userName:sessionStorage.getItem("user_name"),

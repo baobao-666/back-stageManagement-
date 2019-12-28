@@ -20,8 +20,8 @@ const state = {
   //
   view_id: [],//原身份和视图权限关系
   view_ided: [],//身份和视图权限关系
-  page: 10,
-  currenpage: 1
+  page: 10, //每页的数据
+  currenpage: 1 //初始页
 
 
 }

@@ -39,7 +39,6 @@ import Viewtoken from "@/views/exs/userList/viewtoken";
 import Update from "./update";
 import Add from "./Add";
 export default {
-  props: {},
   components: {
     Update,
     Add,
@@ -55,14 +54,9 @@ export default {
       cur: 0,
       show: false,
       showlist: true,
-      
-      
-    };
+     };
   },
-  computed: {
-   
-  },
-  methods: {
+   methods: {
     tab(index) {
       this.cur = index;
       if (this.cur === 0) {
@@ -73,14 +67,8 @@ export default {
         this.showlist = false;
       }
     },
-    
-    
-  },
-  created() {
-   
-   
-   
-  }
+    },
+  
 };
 </script>
 <style scoped lang="scss">

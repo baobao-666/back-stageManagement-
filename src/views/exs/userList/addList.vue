@@ -21,9 +21,7 @@
 <script>
 import { mapActions } from 'vuex';
 export default {
-
-  components: {},
-  data() {
+ data() {
     return {
       addUser:""
     };
