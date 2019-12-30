@@ -248,30 +248,7 @@ export const asyncRoutes = [
       }
     ]
   },
-  {
-    path: '/exs',
-    component: Layout,
-    // redirect: 'noRedirect',
-    // name: 'ErrorPages',
-    meta: {
-      title: '用户管理',
-      icon: 'list'
-    },
-    children: [
-      {
-        path: 'add',
-        component: () => import('@/views/exs/add'),
-        name: 'Add',
-        meta: { title: '添加用户',icon:'icon', noCache: true }
-      },
-      {
-        path: 'exhibition',
-        component: () => import('@/views/exs/exhibition'),
-        name: 'Exhibition',
-        meta: { title: '用户展示',icon:'icon', noCache: true }
-      }
-    ]
-  },
+ 
   {
     path: '/test-questions',
     component: Layout,
@@ -561,6 +538,31 @@ export const asyncRoutes = [
 
   // 404 page must be placed at the end !!!
   { path: '*', redirect: '/404', hidden: true }
+]
+export const authorityRoutes=[
+  {
+    path: '/exs',
+    component: Layout,
+    // redirect: 'noRedirect',
+    // name: 'ErrorPages',
+    meta: {
+      title: 'class'
+    },
+    children: [
+      {
+        path: 'add',
+        component: () => import('@/views/exs/add'),
+        name: 'Add',
+        meta: { title: 'add',view_id: "main-addUser"}
+      },
+      {
+        path: 'exhibition',
+        component: () => import('@/views/exs/exhibition'),
+        name: 'Exhibition',
+        meta: { title: 'user',view_id: "main-showUser"}
+      }
+    ]
+  },
 ]
 
 const createRouter = () => new Router({

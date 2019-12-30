@@ -1,6 +1,4 @@
-
-
-import { login, logout, getInfo } from '@/api/user'
+import { login, logout, getInfo, getViewAuthority } from '@/api/user'
 import { getToken, setToken, removeToken } from '@/utils/auth'
 import router, { resetRouter } from '@/router'
 
@@ -9,7 +7,8 @@ const state = {
   name: '',
   avatar: '',
   introduction: '',
-  roles: []
+  roles: [],
+  viewAuthority: []
 }
 
 const mutations = {
@@ -27,6 +26,9 @@ const mutations = {
   },
   SET_ROLES: (state, roles) => {
     state.roles = roles
+  },
+  SET_VIEWAUTHORITY: (state, viewAuthority) => {
+    state.viewAuthority = viewAuthority;
   }
 }
 
@@ -40,33 +42,55 @@ const actions = {
   },
 
   // get user info
-  getInfo({ commit, state }) {
-    return new Promise((resolve, reject) => {
-      // getInfo(state.token).then(response => {
-      //   const { data } = response
+  async getInfo({ commit, state }) {
+    // 1. 获取个人信息
+    let userInfo = await getInfo();
+    console.log('userInfo...', userInfo);
+    commit('SET_NAME', userInfo.data.user_name)
+    commit('SET_AVATAR', userInfo.data.avatar || 'https://jasonandjay.com/favicon.ico')
 
-      //   if (!data) {
-      //     reject('Verification failed, please Login again.')
-      //   }
+    // 2. 获取用户视图权限信息
+    let viewAuthority = await getViewAuthority();
+    console.log('viewAuthority...', viewAuthority);
+    commit('SET_VIEWAUTHORITY', viewAuthority.data);
 
-      //   const { roles, name, avatar, introduction } = data
+    return viewAuthority.data;
+    // const roles = ['admin']
+    // commit('SET_ROLES', roles)
+    // commit('SET_NAME', name)
+    // commit('SET_AVATAR', avatar)
+    // commit('SET_INTRODUCTION', introduction)
+    // resolve(data)
+    // return {roles};
+    // return new Promise((resolve, reject) => {
+    //   // getInfo(state.token).then(response => {
+    //   //   const { data } = response
 
-      //   // roles must be a non-empty array
-      //   if (!roles || roles.length <= 0) {
-      //     reject('getInfo: roles must be a non-null array!')
-      //   }
+    //   //   if (!data) {
+    //   //     reject('Verification failed, please Login again.')
+    //   //   }
 
-      const roles = ['admin']
-      commit('SET_ROLES', roles)
-      // commit('SET_NAME', name)
-      // commit('SET_AVATAR', avatar)
-      // commit('SET_INTRODUCTION', introduction)
-      // resolve(data)
-      resolve({roles});
-      // }).catch(error => {
-      // reject(error)
-      // })
-    })
+    //   //   const { roles, name, avatar, introduction } = data
+
+    //   //   // roles must be a non-empty array
+    //   //   if (!roles || roles.length <= 0) {
+    //   //     reject('getInfo: roles must be a non-null array!')
+    //   //   }
+
+
+
+
+    //   const roles = ['admin']
+    //   commit('SET_ROLES', roles)
+    //   // commit('SET_NAME', name)
+    //   // commit('SET_AVATAR', avatar)
+    //   // commit('SET_INTRODUCTION', introduction)
+    //   // resolve(data)
+    //   resolve({roles});
+    //   // }).catch(error => {
+    //   // reject(error)
+    //   // })
+    // })
   },
 
   // user logout
