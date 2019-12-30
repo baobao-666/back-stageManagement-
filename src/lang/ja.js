@@ -62,7 +62,12 @@ export default {
     clipboardDemo: 'Clipboard',
     i18n: '多言語',
     externalLink: '外部リンク',
-    profile: 'プロフィール'
+    profile: 'プロフィール',
+    exam:{
+      title:"テスト管理",
+      add:"試験の作成",
+      list:"テストリスト"
+    }
   },
   navbar: {
     dashboard: 'トップ',

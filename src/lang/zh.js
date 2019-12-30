@@ -62,7 +62,18 @@ export default {
     clipboardDemo: 'Clipboard',
     i18n: '国际化',
     externalLink: '外链',
-    profile: '个人中心'
+    profile: '个人中心',
+    exam:{
+      title:"考试管理",
+      add:"创建考试",
+      list:"考试列表"
+    },
+    title:{
+      name:"班级管理",
+      class:'班级管理',
+      classRoom:'教室管理',
+      statude:'学生管理'
+    }
   },
   navbar: {
     dashboard: '首页',

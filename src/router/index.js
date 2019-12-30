@@ -44,25 +44,25 @@ export const constantRoutes = [
     path:"/classroom",
     component: Layout,
     name: 'classRoom',
-    meta: { title: '班级管理', icon: 'documentation', affix: true },
+    meta: { title: 'title.class', icon: 'documentation', affix: true },
     children:[
       {
         path:"/classroom/classmanagement",
         component:()=>import('@/views/classRoom/classManagement/index'),
         name:"classmanagement",
-        meta:{title:"班级管理"}
+        meta:{title:"title.class"}
       },
       {
         path:"/classroom/Classroommanagement",
         component:()=>import('@/views/classRoom/ClassroomManagement/index'),
         name:'Classroommanagement',
-        meta:{title:"教室管理"}
+        meta:{title:"title.classRoom"}
       },
       {
         path:"/classroom/studentManagement",
         component:()=>import('@/views/classRoom/studentManagement/index'),
         name:'studentManagement',
-        meta:{title:"学生管理"}
+        meta:{title:"title.statude"}
       }
     ]
   },
@@ -140,19 +140,19 @@ export const constantRoutes = [
   {
     path: '/exam',
     component: Layout,
-    meta: { title: '考试管理', icon: 'guide', noCache: true },
+    meta: { title: 'exam.title', icon: 'guide', noCache: true },
     children: [
       {
         path: '/Addexam',
         component: () => import('@/views/exam/Addexam'),
         name: 'AddExam',
-        meta: { title: '添加考试', icon: 'guide', noCache: true },
+        meta: { title: 'exam.add', icon: 'guide', noCache: true },
       },
       {
         path: '/Listexam',
         component: () => import('@/views/exam/Listexam'),
         name: 'ListExam',
-        meta: { title: '试卷列表', icon: 'guide', noCache: true },
+        meta: { title: 'exam.list', icon: 'guide', noCache: true },
       },
       {
         path: '/Addexam/Addedit',
