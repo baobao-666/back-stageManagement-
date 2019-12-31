@@ -5,7 +5,7 @@
       <el-input type="text" v-model="fromValue.adduser"   placeholder="请输入用户名" />
     </div>
     <div class="addUser_input">
-      <el-input type="password" v-model="fromValue.pass"  placeholder="请输入密码" />
+      <el-input type="text" v-model="fromValue.pass"  placeholder="请输入密码" />
     </div>
     <!-- 下拉框 -->
     <div>

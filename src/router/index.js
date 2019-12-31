@@ -44,25 +44,25 @@ export const constantRoutes = [
     path:"/classroom",
     component: Layout,
     name: 'classRoom',
-    meta: { title: '班级管理', icon: 'documentation', affix: true },
+    meta: { title:"exam.class", icon: 'documentation' },
     children:[
       {
         path:"/classroom/classmanagement",
         component:()=>import('@/views/classRoom/classManagement/index'),
         name:"classmanagement",
-        meta:{title:"班级管理"}
+        meta:{title:"exam.class"}
       },
       {
         path:"/classroom/Classroommanagement",
         component:()=>import('@/views/classRoom/ClassroomManagement/index'),
         name:'Classroommanagement',
-        meta:{title:"教室管理"}
+        meta:{title:"exam.classRoom"}
       },
       {
         path:"/classroom/studentManagement",
         component:()=>import('@/views/classRoom/studentManagement/index'),
         name:'studentManagement',
-        meta:{title:"学生管理"}
+        meta:{title:"exam.statude"}
       }
     ]
   },
@@ -181,52 +181,27 @@ export const constantRoutes = [
       }
     ]
   },
-
-]
-
-/**
- * asyncRoutes
- * the routes that need to be dynamically loaded based on user roles
- */
-export const asyncRoutes = [
   {
-    path: '/permission',
+    path: '/exs',
     component: Layout,
-    redirect: '/permission/page',
-    alwaysShow: true, // will always show the root menu
-    name: 'Permission',
+    // redirect: 'noRedirect',
+    // name: 'ErrorPages',
     meta: {
-      title: 'permission',
-      icon: 'lock',
-      roles: ['admin', 'editor'] // you can set roles in root nav
+      title: '用户管理',
+      icon: 'edit'
     },
     children: [
       {
-        path: 'page',
-        component: () =>import('@/views/permission/page'),
-        name: 'PagePermission',
-        meta: {
-          title: 'pagePermission',
-          roles: ['admin'] // or you can only set roles in sub nav
-        }
+        path: 'add',
+        component: () => import('@/views/exs/add'),
+        name: 'Add',
+        meta: { title: '添加用户', noCache: true }
       },
       {
-        path: 'directive',
-        component: () => import('@/views/permission/directive'),
-        name: 'DirectivePermission',
-        meta: {
-          title: 'directivePermission'
-          // if do not set roles, means: this page does not require permission
-        }
-      },
-      {
-        path: 'role',
-        component: () => import('@/views/permission/role'),
-        name: 'RolePermission',
-        meta: {
-          title: 'rolePermission',
-          roles: ['admin']
-        }
+        path: 'exhibition',
+        component: () => import('@/views/exs/exhibition'),
+        name: 'Exhibition',
+        meta: { title: '用户展示', noCache: true }
       }
     ]
   },
@@ -310,8 +285,55 @@ export const asyncRoutes = [
         },
       }
     ]
+  }
+]
+
+/**
+ * asyncRoutes
+ * the routes that need to be dynamically loaded based on user roles
+ */
+export const asyncRoutes = [
+  {
+    path: '/permission',
+    component: Layout,
+    redirect: '/permission/page',
+    alwaysShow: true, // will always show the root menu
+    name: 'Permission',
+    meta: {
+      title: 'permission',
+      icon: 'lock',
+      roles: ['admin', 'editor'] // you can set roles in root nav
+    },
+    children: [
+      {
+        path: 'page',
+        component: () =>import('@/views/permission/page'),
+        name: 'PagePermission',
+        meta: {
+          title: 'pagePermission',
+          roles: ['admin'] // or you can only set roles in sub nav
+        }
+      },
+      {
+        path: 'directive',
+        component: () => import('@/views/permission/directive'),
+        name: 'DirectivePermission',
+        meta: {
+          title: 'directivePermission'
+          // if do not set roles, means: this page does not require permission
+        }
+      },
+      {
+        path: 'role',
+        component: () => import('@/views/permission/role'),
+        name: 'RolePermission',
+        meta: {
+          title: 'rolePermission',
+          roles: ['admin']
+        }
+      }
+    ]
   },
-  
   {
     path: '/icon',
     component: Layout,
@@ -362,32 +384,6 @@ export const asyncRoutes = [
       }
     ]
   },
-  
-  {
-    path: '/exs',
-    component: Layout,
-    // redirect: 'noRedirect',
-    // name: 'ErrorPages',
-    meta: {
-      title: '用户管理',
-      icon: 'edit'
-    },
-    children: [
-      {
-        path: 'add',
-        component: () => import('@/views/exs/add'),
-        name: 'Add',
-        meta: { title: '添加用户', noCache: true }
-      },
-      {
-        path: 'exhibition',
-        component: () => import('@/views/exs/exhibition'),
-        name: 'Exhibition',
-        meta: { title: '用户展示', noCache: true }
-      }
-    ]
-  },
-
   {
     path: '/tab',
     component: Layout,
@@ -571,25 +567,25 @@ export const authorityRoutes = [
   {
     path:"/classroom",
     component: Layout,
-    meta: { title: '班级管理', icon: 'documentation'},
+    meta: { title: 'title.class', icon: 'documentation'},
     children:[
       {
         path:"classmanagement",
         component:()=>import('@/views/classRoom/classManagement/index'),
         name:"classmanagement",
-        meta:{title:"班级管理",icon: 'dashboard', view_id: 'main-grade'}
+        meta:{title:"title.class",icon: 'dashboard', view_id: 'main-grade'}
       },
       {
         path:"Classroommanagement",
         component:()=>import('@/views/classRoom/ClassroomManagement/index'),
         name:'Classroommanagement',
-        meta:{title:"教室管理",icon: 'dashboard', view_id: 'main-room'}
+        meta:{title:"title.classRoom",icon: 'dashboard', view_id: 'main-room'}
       },
       {
         path:"studentManagement",
         component:()=>import('@/views/classRoom/studentManagement/index'),
         name:'studentManagement',
-        meta:{title:"学生管理",icon: 'dashboard', view_id: 'main-student'}
+        meta:{title:"title.statude",icon: 'dashboard', view_id: 'main-student'}
       }
     ]
   }

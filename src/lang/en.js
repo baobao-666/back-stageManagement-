@@ -62,7 +62,12 @@ export default {
     clipboardDemo: 'Clipboard',
     i18n: 'I18n',
     externalLink: 'External Link',
-    profile: 'Profile'
+    profile: 'Profile',
+    exam:{
+      class:'class management',
+      classRoom:'Classroom management',
+      statude:'student management'
+    }
   },
   navbar: {
     dashboard: 'Dashboard',
