@@ -61,11 +61,12 @@ export default {
     theme: 'テーマ変更',
     clipboardDemo: 'Clipboard',
     i18n: '多言語',
-    externalLink: '外部リンク', 
+    externalLink: '外部リンク',
     profile: 'プロフィール',
-    class:'ユーザー管理',
-    add:'ユーザー追加',
-    user:'ユーザー展示'
+    exam:'試験問題管理',
+    addexam:'試験問題を追加する',
+    classexam:'型試験問題',
+    lookexam:'試験問題を調べる'
   },
   navbar: {
     dashboard: 'トップ',

@@ -70,7 +70,11 @@ export default {
     },
     class:"用户管理",
     add:'添加用户',
-    user:'用户展示'
+    user:'用户展示',
+    exam:'试题管理',
+    addexam:'添加试题',
+    classexam:'类型试题',
+    lookexam:'查看试题'
   },
   navbar: {
     dashboard: '首页',

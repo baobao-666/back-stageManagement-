@@ -185,7 +185,7 @@ export const constantRoutes = [
     alwaysShow: true, // will always show the root menu
     name: 'test-questions',
     meta: {
-      title: '试题管理',
+      title: 'exam',
       icon: 'edit',
       // roles: ['admin', 'editor'] // you can set roles in root nav
     },
@@ -195,7 +195,7 @@ export const constantRoutes = [
         component: () => import('@/views/test-questions/add'),
         name: 'test-questions',
         meta: {
-          title: '添加试题',
+          title: 'addexam',
           // roles: ['admin'] // or you can only set roles in sub nav
         }
       },
@@ -204,7 +204,7 @@ export const constantRoutes = [
         component: () => import('@/views/test-questions/classify'),
         name: 'Test-questions',
         meta: {
-          title: '试题分类',
+          title: 'classexam',
           // roles: ['admin'] // or you can only set roles in sub nav
         }
       },
@@ -213,7 +213,7 @@ export const constantRoutes = [
         component: () => import('@/views/test-questions/examine'),
         name: 'Test-questions',
         meta: {
-          title: '查看试题',
+          title: 'lookexam',
         },
       },
       {
