@@ -161,6 +161,107 @@ export const constantRoutes = [
       },
     ]
   },
+  {
+    path: '/test-questions',
+    component: Layout,
+    redirect: '/test-questions/add',
+    alwaysShow: true, // will always show the root menu
+    name: 'test-questions',
+    meta: {
+      title: '试题管理',
+      icon: 'edit',
+      // roles: ['admin', 'editor'] // you can set roles in root nav
+    },
+    children: [
+      {
+        path: 'add',
+        component: () => import('@/views/test-questions/add'),
+        name: 'test-questions',
+        meta: {
+          title: '添加试题',
+          // roles: ['admin'] // or you can only set roles in sub nav
+        }
+      },
+      {
+        path: 'classify',
+        component: () => import('@/views/test-questions/classify'),
+        name: 'Test-questions',
+        meta: {
+          title: '试题分类',
+          // roles: ['admin'] // or you can only set roles in sub nav
+        }
+      },
+      {
+        path: 'examine',
+        component: () => import('@/views/test-questions/examine'),
+        name: 'Test-questions',
+        meta: {
+          title: '查看试题',
+        },
+      },
+      {
+        path: 'update',
+        hidden:true,
+        component: () => import('@/views/test-questions/update/'),
+        name: 'Test-update',
+        meta: {
+          title: '编辑试题',
+        },
+      },
+      {
+        path: 'detail',
+        hidden:true,
+        component: () => import('@/views/test-questions/detail'),
+        name: 'Test-detail',
+        meta: {
+          title: '试题详情',
+        },
+      }
+    ]
+  },
+  
+  {
+    path: '/examination',
+    component: Layout,
+    redirect: '/examination/backlog',
+    alwaysShow: true, // will always show the root menu
+    name: 'Examination',
+    meta: {
+      title: '阅卷管理',
+      icon: 'edit',
+      roles: ['admin', 'editor'] // you can set roles in root nav
+    },
+    children: [
+      {
+        path: 'backlog',
+        component: () => import('@/views/examination/backlog'),
+        name: 'Examination',
+        meta: {
+          title: '待批班级',
+          // roles: ['admin'] // or you can only set roles in sub nav
+        }
+      }
+    ]
+  },
+  {
+    path: '/tan',
+    component: Layout,
+    // redirect: 'noRedirect',
+    // name: 'ErrorPages',
+    meta: {
+      title: 'tan',
+      icon: 'guide',
+    },
+    children: [
+      {
+        path: 'index',
+        component: () => import('@/views/tan/index'),
+        name: 'Tan',
+        meta: { title: '上传头像',icon: 'guide'}
+      },
+      
+    ]
+  },
   
   {
     path: '/profile',
@@ -225,88 +326,8 @@ export const asyncRoutes = [
       }
     ]
   },
-  {
-    path: '/examination',
-    component: Layout,
-    redirect: '/examination/backlog',
-    alwaysShow: true, // will always show the root menu
-    name: 'Examination',
-    meta: {
-      title: '阅卷管理',
-      icon: 'edit',
-      roles: ['admin', 'editor'] // you can set roles in root nav
-    },
-    children: [
-      {
-        path: 'backlog',
-        component: () => import('@/views/examination/backlog'),
-        name: 'Examination',
-        meta: {
-          title: '待批班级',
-          // roles: ['admin'] // or you can only set roles in sub nav
-        }
-      }
-    ]
-  },
+  
  
-  {
-    path: '/test-questions',
-    component: Layout,
-    redirect: '/test-questions/add',
-    alwaysShow: true, // will always show the root menu
-    name: 'test-questions',
-    meta: {
-      title: '试题管理',
-      icon: 'edit',
-      // roles: ['admin', 'editor'] // you can set roles in root nav
-    },
-    children: [
-      {
-        path: 'add',
-        component: () => import('@/views/test-questions/add'),
-        name: 'test-questions',
-        meta: {
-          title: '添加试题',
-          // roles: ['admin'] // or you can only set roles in sub nav
-        }
-      },
-      {
-        path: 'classify',
-        component: () => import('@/views/test-questions/classify'),
-        name: 'Test-questions',
-        meta: {
-          title: '试题分类',
-          // roles: ['admin'] // or you can only set roles in sub nav
-        }
-      },
-      {
-        path: 'examine',
-        component: () => import('@/views/test-questions/examine'),
-        name: 'Test-questions',
-        meta: {
-          title: '查看试题',
-        },
-      },
-      {
-        path: 'update',
-        hidden:true,
-        component: () => import('@/views/test-questions/update/'),
-        name: 'Test-update',
-        meta: {
-          title: '编辑试题',
-        },
-      },
-      {
-        path: 'detail',
-        hidden:true,
-        component: () => import('@/views/test-questions/detail'),
-        name: 'Test-detail',
-        meta: {
-          title: '试题详情',
-        },
-      }
-    ]
-  },
   
   {
     path: '/icon',
@@ -546,20 +567,21 @@ export const authorityRoutes=[
     // redirect: 'noRedirect',
     // name: 'ErrorPages',
     meta: {
-      title: 'class'
+      title: 'class',
+      icon: 'guide',
     },
     children: [
       {
         path: 'add',
         component: () => import('@/views/exs/add'),
         name: 'Add',
-        meta: { title: 'add',view_id: "main-addUser"}
+        meta: { title: 'add',icon: 'guide',view_id: "main-addUser"}
       },
       {
         path: 'exhibition',
         component: () => import('@/views/exs/exhibition'),
         name: 'Exhibition',
-        meta: { title: 'user',view_id: "main-showUser"}
+        meta: { title: 'user',icon: 'guide',view_id: "main-showUser"}
       }
     ]
   },
