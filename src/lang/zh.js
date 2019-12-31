@@ -62,7 +62,11 @@ export default {
     clipboardDemo: 'Clipboard',
     i18n: '国际化',
     externalLink: '外链',
-    profile: '个人中心'
+    profile: '个人中心',
+    exam:'试题管理',
+    addexam:'添加试题',
+    classexam:'类型试题',
+    lookexam:'查看试题'
   },
   navbar: {
     dashboard: '首页',
