@@ -39,33 +39,6 @@ import nestedRouter from './modules/nested'
  * all roles can be accessed
  */
 export const constantRoutes = [
-  // 班级管理路由
-  {
-    path:"/classroom",
-    component: Layout,
-    name: 'classRoom',
-    meta: { title:"exam.class", icon: 'documentation' },
-    children:[
-      {
-        path:"/classroom/classmanagement",
-        component:()=>import('@/views/classRoom/classManagement/index'),
-        name:"classmanagement",
-        meta:{title:"exam.class"}
-      },
-      {
-        path:"/classroom/Classroommanagement",
-        component:()=>import('@/views/classRoom/ClassroomManagement/index'),
-        name:'Classroommanagement',
-        meta:{title:"exam.classRoom"}
-      },
-      {
-        path:"/classroom/studentManagement",
-        component:()=>import('@/views/classRoom/studentManagement/index'),
-        name:'studentManagement',
-        meta:{title:"exam.statude"}
-      }
-    ]
-  },
   {
     path: '/redirect',
     component: Layout,
@@ -182,30 +155,6 @@ export const constantRoutes = [
     ]
   },
   {
-    path: '/exs',
-    component: Layout,
-    // redirect: 'noRedirect',
-    // name: 'ErrorPages',
-    meta: {
-      title: '用户管理',
-      icon: 'edit'
-    },
-    children: [
-      {
-        path: 'add',
-        component: () => import('@/views/exs/add'),
-        name: 'Add',
-        meta: { title: '添加用户', noCache: true }
-      },
-      {
-        path: 'exhibition',
-        component: () => import('@/views/exs/exhibition'),
-        name: 'Exhibition',
-        meta: { title: '用户展示', noCache: true }
-      }
-    ]
-  },
-  {
     path: '/examination',
     component: Layout,
     redirect: '/examination/backlog',
@@ -228,6 +177,7 @@ export const constantRoutes = [
       }
     ]
   },
+ 
   {
     path: '/test-questions',
     component: Layout,
@@ -384,6 +334,9 @@ export const asyncRoutes = [
       }
     ]
   },
+  
+  
+
   {
     path: '/tab',
     component: Layout,
@@ -567,28 +520,51 @@ export const authorityRoutes = [
   {
     path:"/classroom",
     component: Layout,
-    meta: { title: 'title.class', icon: 'documentation'},
+    meta: { title: 'exam.class', icon: 'documentation'},
     children:[
       {
         path:"classmanagement",
         component:()=>import('@/views/classRoom/classManagement/index'),
         name:"classmanagement",
-        meta:{title:"title.class",icon: 'dashboard', view_id: 'main-grade'}
+        meta:{title:"exam.class",icon: 'dashboard', view_id: 'main-grade'}
       },
       {
         path:"Classroommanagement",
         component:()=>import('@/views/classRoom/ClassroomManagement/index'),
         name:'Classroommanagement',
-        meta:{title:"title.classRoom",icon: 'dashboard', view_id: 'main-room'}
+        meta:{title:"exam.classRoom",icon: 'dashboard', view_id: 'main-room'}
       },
       {
         path:"studentManagement",
         component:()=>import('@/views/classRoom/studentManagement/index'),
         name:'studentManagement',
-        meta:{title:"title.statude",icon: 'dashboard', view_id: 'main-student'}
+        meta:{title:"exam.statude",icon: 'dashboard', view_id: 'main-student'}
       }
     ]
-  }
+  },
+  {
+    path: '/exs',
+    component: Layout,
+    // redirect: 'noRedirect',
+    // name: 'ErrorPages',
+    meta: {
+      title: 'class'
+    },
+    children: [
+      {
+        path: 'add',
+        component: () => import('@/views/exs/add'),
+        name: 'Add',
+        meta: { title: 'add',view_id: "main-addUser"}
+      },
+      {
+        path: 'exhibition',
+        component: () => import('@/views/exs/exhibition'),
+        name: 'Exhibition',
+        meta: { title: 'user',view_id: "main-showUser"}
+      }
+    ]
+  },
 ]
 
 const createRouter = () => new Router({

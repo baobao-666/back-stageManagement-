@@ -67,7 +67,10 @@ export default {
       class:'class management',
       classRoom:'Classroom management',
       statude:'student management'
-    }
+    },
+    class:'user management',
+    add:'add users',
+    user:'the user display'
   },
   navbar: {
     dashboard: 'Dashboard',

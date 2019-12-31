@@ -115,6 +115,7 @@
             <el-table-column prop="view_id" label="视图id"></el-table-column>
           </el-table>
           <el-pagination
+          
             @size-change="handleSizeChange"
             @current-change="handleCurrentChange"
             :page-size="10"

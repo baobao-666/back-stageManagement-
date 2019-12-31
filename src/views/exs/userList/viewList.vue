@@ -37,9 +37,7 @@
 <script>
 import { mapState, mapActions } from "vuex";
 export default {
-  props: {},
-  components: {},
-  data() {
+   data() {
     return {
       viewID: "",
       listid: ""

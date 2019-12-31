@@ -8,9 +8,8 @@ const state = {
   identity: [],//原身份数据
   identityed:[],//身份数据
 
-  //
-  views: [],//原视图接口权限
-  viewsed: [],//视图接口权限
+  
+  
   //
   api: [],//原api权限数据
   apied: [],//api权限数据
@@ -20,8 +19,8 @@ const state = {
   //
   view_id: [],//原身份和视图权限关系
   view_ided: [],//身份和视图权限关系
-  page: 10,
-  currenpage: 1
+  page: 10, //每页的数据
+  currenpage: 1 //初始页
 
 
 }
@@ -125,7 +124,7 @@ const actions = {
   //
   async getviews({ commit }, payload) {
     let res = await getviews(payload)
-    //console.log(res.data)
+    console.log(res.data)
     commit('getviewID', res.data)
   },
   //
