@@ -3,7 +3,10 @@
     <div class="left">
         <div class="item" v-for="(item,index) in TeacherList.questions" :key="index">
           <h5>{{item.title}}</h5>
-          <p>{{item.questions_stem}}</p>
+          <pre>
+            {{item.questions_stem}}
+          </pre>
+          <p></p>
           <p>{{item.questions_answer}}</p>
         </div>
     </div>

@@ -63,18 +63,27 @@ export default {
     i18n: '国际化',
     externalLink: '外链',
     profile: '个人中心',
-    exam:{
+    classStatude:{
       class: '班级管理',
       classRoom:'教室管理',
       statude:'学生管理'
     },
     class:"用户管理",
-    add:'添加用户',
+    adds:'添加用户',
     user:'用户展示',
     exam:'试题管理',
     addexam:'添加试题',
     classexam:'类型试题',
-    lookexam:'查看试题'
+    lookexam:'查看试题',
+    title:"考试管理",
+    add:"创建考试",
+    list:"考试列表",
+    exams:{
+      title:"考试管理",
+      add:"创建考试",
+      list:"考试列表"
+    },
+    
   },
   navbar: {
     dashboard: '首页',

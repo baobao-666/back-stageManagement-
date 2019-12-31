@@ -113,19 +113,19 @@ export const constantRoutes = [
   {
     path: '/exam',
     component: Layout,
-    meta: { title: '考试管理', icon: 'guide', noCache: true },
+    meta: { title: 'exams.title', icon: 'guide', noCache: true },
     children: [
       {
         path: '/Addexam',
         component: () => import('@/views/exam/Addexam'),
         name: 'AddExam',
-        meta: { title: '添加考试', icon: 'guide', noCache: true },
+        meta: { title: 'exams.add', icon: 'guide', noCache: true },
       },
       {
         path: '/Listexam',
         component: () => import('@/views/exam/Listexam'),
         name: 'ListExam',
-        meta: { title: '试卷列表', icon: 'guide', noCache: true },
+        meta: { title: 'exams.list', icon: 'guide', noCache: true },
       },
       {
         path: '/Addexam/Addedit',
@@ -520,25 +520,25 @@ export const authorityRoutes = [
   {
     path:"/classroom",
     component: Layout,
-    meta: { title: 'exam.class', icon: 'documentation'},
+    meta: { title: 'classStatude.class', icon: 'documentation'},
     children:[
       {
         path:"classmanagement",
         component:()=>import('@/views/classRoom/classManagement/index'),
         name:"classmanagement",
-        meta:{title:"exam.class",icon: 'dashboard', view_id: 'main-grade'}
+        meta:{title:"classStatude.class",icon: 'dashboard', view_id: 'main-grade'}
       },
       {
         path:"Classroommanagement",
         component:()=>import('@/views/classRoom/ClassroomManagement/index'),
         name:'Classroommanagement',
-        meta:{title:"exam.classRoom",icon: 'dashboard', view_id: 'main-room'}
+        meta:{title:"classStatude.classRoom",icon: 'dashboard', view_id: 'main-room'}
       },
       {
         path:"studentManagement",
         component:()=>import('@/views/classRoom/studentManagement/index'),
         name:'studentManagement',
-        meta:{title:"exam.statude",icon: 'dashboard', view_id: 'main-student'}
+        meta:{title:"classStatude.statude",icon: 'dashboard', view_id: 'main-student'}
       }
     ]
   },
@@ -555,7 +555,7 @@ export const authorityRoutes = [
         path: 'add',
         component: () => import('@/views/exs/add'),
         name: 'Add',
-        meta: { title: 'add',view_id: "main-addUser"}
+        meta: { title: 'adds',view_id: "main-addUser"}
       },
       {
         path: 'exhibition',

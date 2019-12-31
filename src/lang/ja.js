@@ -66,7 +66,12 @@ export default {
     exam:'試験問題管理',
     addexam:'試験問題を追加する',
     classexam:'型試験問題',
-    lookexam:'試験問題を調べる'
+    lookexam:'試験問題を調べる',
+    exam:{
+      title:"テスト管理",
+      add:"試験の作成",
+      list:"テストリスト"
+    }
   },
   navbar: {
     dashboard: 'トップ',

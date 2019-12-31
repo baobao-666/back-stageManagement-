@@ -63,14 +63,22 @@ export default {
     i18n: 'I18n',
     externalLink: 'External Link',
     profile: 'Profile',
-    exam:{
+    classStatude:{
       class:'class management',
       classRoom:'Classroom management',
       statude:'student management'
     },
-    class:'user management',
-    add:'add users',
-    user:'the user display'
+      class:'user management',
+      adds:'add users',
+      user:'the user display',
+      title:"Examination management",
+      add:"Create exam",
+      list:"Examination list",
+      exams:{
+        title:"Examination management",
+        add:"Create exam",
+        list:"Examination list"
+      }
   },
   navbar: {
     dashboard: 'Dashboard',
