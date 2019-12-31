@@ -15,12 +15,15 @@ export function getInfo() {
   })
 }
 
-export function getViewAuthority(){
-  return request({
-    url: '/user/view_authority',
-    method: 'get'
-  })
-}
+// 改变路由权限
+export function getViewAuthority() {
+      return request({
+        url: '/user/view_authority',
+        method: 'get'
+      })
+    }
+
+
 
 export function logout() {
   return request({

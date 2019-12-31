@@ -1,7 +1,7 @@
 // 考试阅卷管理
-import {getMarking} from '@/api/ExaminationMarkingManagement'
+import {getIfClassRoom} from '@/api/StudentClassClassroomManagement'
 const state = {
-  examList:[]
+  examList:[]  // 分配好的教室数据
 }
 
 const mutations = {
@@ -11,11 +11,12 @@ const mutations = {
 }
 
 const actions = {
-  async getMarking({commit}){
-    let res = await getMarking();
-    console.log('res',res);
-    commit('getExamList')
-  }
+  async getIfClassRoom({commit}){
+    // 获取全部教室数据
+    let res = await getIfClassRoom();
+    console.log('res132',res);
+       commit("getExamList",res.data)
+  },
 }
 
 export default {

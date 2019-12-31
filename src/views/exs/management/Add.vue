@@ -2,10 +2,10 @@
   <div class="list">
     <!-- input -->
     <div class="addUser_input">
-      <el-input type="text" v-model="fromValue.adduser"   placeholder="请输入用户名" />
+      <el-input type="text" v-model="fromValue.adduser" placeholder="请输入用户名" />
     </div>
     <div class="addUser_input">
-      <el-input type="password" v-model="fromValue.pass"  placeholder="请输入密码" />
+      <el-input type="text" v-model="fromValue.pass" placeholder="请输入密码" />
     </div>
     <!-- 下拉框 -->
     <div>
@@ -26,19 +26,18 @@
   </div>
 </template>
 <script>
-import axios from 'axios'
+import axios from "axios";
 import { mapState, mapActions } from "vuex";
 export default {
   props: {},
   components: {},
   data() {
     return {
-     fromValue:{
-      idvalue: "",
-      adduser:"",
-      pass:""
+      fromValue: {
+        idvalue: "",
+        adduser: "",
+        pass: ""
       }
-     
     };
   },
   computed: {
@@ -51,23 +50,23 @@ export default {
       getidentity: "userPermission/getidentity",
       getuser: "setUser/getuser"
     }),
-    addUser(){
-     this.getuser({
-        user_name:this.fromValue.adduser,
-        user_pwd:this.fromValue.pass,
-        identity_id:this.fromValue.idvalue
-     })
-     window.sessionStorage.setItem("user_name",this.fromValue.adduser)
-     window.sessionStorage.setItem("user_psd",this.fromValue.pass)
+    addUser() {
+      this.getuser({
+        user_name: this.fromValue.adduser,
+        user_pwd: this.fromValue.pass,
+        identity_id: this.fromValue.idvalue
+      });
+      window.sessionStorage.setItem("user_name", this.fromValue.adduser);
+      window.sessionStorage.setItem("user_psd", this.fromValue.pass);
     },
 
-    resolve(){
-     this.fromValue.adduser=""
-     this.fromValue.pass=""
-     this.fromValue.idvalue=""
-     window.sessionStorage.removeItem("user_name")
-     window.sessionStorage.removeItem("user_psd")
-    },
+    resolve() {
+      this.fromValue.adduser = "";
+      this.fromValue.pass = "";
+      this.fromValue.idvalue = "";
+      window.sessionStorage.removeItem("user_name");
+      window.sessionStorage.removeItem("user_psd");
+    }
   },
   created() {
     this.getidentity();
@@ -97,7 +96,7 @@ export default {
   border-radius: 4px;
   border: 0;
   font-size: 14px;
-}                                                   
+}
 .bun {
   height: 30px;
   padding: 0 40px;
@@ -114,7 +113,7 @@ export default {
   border: 0;
   font-size: 14px;
   color: #000;
-   background: #fff;
+  background: #fff;
   border: 1px solid #ccc;
 }
 .el {

@@ -88,6 +88,8 @@ export default {
       courseList: state => state.TestQuestionManagement.courseList,
       // 题目类型的数据
       topicList: state => state.TestQuestionManagement.topicList,
+      // 所有试题
+      testQuestionsList:state =>state.TestQuestionManagement.testQuestionsList,
     })
   },
   methods: {
@@ -103,8 +105,8 @@ export default {
     }),
     submit() {
       // 要修改的类型数据  所需试题信息
-      let questions_stem = this.form.name, //题干
-          title = this.form.desc, // 主题
+      let title = this.form.name, //题干
+          questions_stem = this.form.desc, // 主题
           exam_id = this.form.exam, // 考试类型
           subject_id = this.form.subject, //课程类型
           questions_type_id = this.form.topic, //题目类型
@@ -125,7 +127,7 @@ export default {
           type: "warning"
         }).then(() => {
             // 更新试题接口
-            this.UpdateTestQuestions({
+            let data ={
               questions_id,
               questions_type_id,
               questions_stem,
@@ -133,12 +135,13 @@ export default {
               exam_id,
               questions_answer,
               title
-            });
+            }
+            this.UpdateTestQuestions(data);
             this.$message({
               type: "success",
               message: "修改成功!"
             });
-            // this.$router.push('/examine')
+            this.$router.push('/test-questions/examine')
           }).catch(() => {
             this.$message({
               type: "info",
@@ -158,7 +161,16 @@ export default {
     // 调用题目类型接口
     this.getTopicQuestionsType();
   },
-  mounted() {}
+  mounted() {
+    let item = this.testQuestionsList.find((item,index)=>item.questions_id===this.questions_id);
+    console.log(item.title,'title')
+    this.form.name = item.title;
+    this.form.desc= item.questions_stem;
+    this.form.exam = item.exam_id;
+    this.form.subject = item.subject_id;
+    this.form.topic = item.questions_type_id;
+    this.form.answer = item.questions_answer;
+  }
 };
 </script>
 <style scoped lang="scss">

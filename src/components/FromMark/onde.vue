@@ -8,7 +8,7 @@
            <div class="from-main">
             <!-- 提价表单 -->
             <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
-                    <el-form-item  label="班级名"   prop="name"></el-form-item>
+                    <el-form-item  label="班级名"   prop="Class"></el-form-item>
                        <el-input  v-model="ruleForm.Class"></el-input>
             </el-form>
             <!-- 提价表单 -->
@@ -31,8 +31,8 @@ export default {
            Class: ''
          },
          rules: {
-             name: [
-                 { required: true, message: '请输入活动名称', trigger: 'blur' },
+             Class: [
+            { required: true, message: '请输入活动名称', trigger: 'blur' },
             { min: 3, max: 5, message: '长度在 3 到 5 个字符', trigger: 'blur' }
           ]
         }

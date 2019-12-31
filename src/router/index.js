@@ -39,33 +39,6 @@ import nestedRouter from './modules/nested'
  * all roles can be accessed
  */
 export const constantRoutes = [
-  // 班级管理路由
-  {
-    path:"/classroom",
-    component: Layout,
-    name: 'classRoom',
-    meta: { title: '班级管理', icon: 'documentation', affix: true },
-    children:[
-      {
-        path:"/classroom/classmanagement",
-        component:()=>import('@/views/classRoom/classManagement/index'),
-        name:"classmanagement",
-        meta:{title:"班级管理"}
-      },
-      {
-        path:"/classroom/Classroommanagement",
-        component:()=>import('@/views/classRoom/ClassroomManagement/index'),
-        name:'Classroommanagement',
-        meta:{title:"教室管理"}
-      },
-      {
-        path:"/classroom/studentManagement",
-        component:()=>import('@/views/classRoom/studentManagement/index'),
-        name:'studentManagement',
-        meta:{title:"学生管理"}
-      }
-    ]
-  },
   {
     path: '/redirect',
     component: Layout,
@@ -140,25 +113,30 @@ export const constantRoutes = [
   {
     path: '/exam',
     component: Layout,
-    meta: { title: '考试管理', icon: 'guide', noCache: true },
+    meta: { title: 'exams.title', icon: 'guide', noCache: true },
     children: [
       {
         path: '/Addexam',
         component: () => import('@/views/exam/Addexam'),
         name: 'AddExam',
-        meta: { title: '添加考试', icon: 'guide', noCache: true },
+        meta: { title: 'exams.add', icon: 'guide', noCache: true },
       },
       {
         path: '/Listexam',
         component: () => import('@/views/exam/Listexam'),
         name: 'ListExam',
-        meta: { title: '试卷列表', icon: 'guide', noCache: true },
+        meta: { title: 'exams.list', icon: 'guide', noCache: true },
       },
       {
         path: '/Addexam/Addedit',
         component: () => import('@/views/exam/Addedit'),
         name: 'Addedit',
       },
+      {
+        path: '/Detail',
+        component: () => import('@/views/exam/Detail'),
+        name: 'Detail',
+      }
     ]
   },
   {
@@ -241,25 +219,6 @@ export const constantRoutes = [
           // roles: ['admin'] // or you can only set roles in sub nav
         }
       }
-    ]
-  },
-  {
-    path: '/tan',
-    component: Layout,
-    // redirect: 'noRedirect',
-    // name: 'ErrorPages',
-    meta: {
-      title: 'tan',
-      icon: 'guide',
-    },
-    children: [
-      {
-        path: 'index',
-        component: () => import('@/views/tan/index'),
-        name: 'Tan',
-        meta: { title: '上传头像',icon: 'guide'}
-      },
-      
     ]
   },
   
@@ -560,7 +519,33 @@ export const asyncRoutes = [
   // 404 page must be placed at the end !!!
   { path: '*', redirect: '/404', hidden: true }
 ]
-export const authorityRoutes=[
+
+export const authorityRoutes = [
+  {
+    path:"/classroom",
+    component: Layout,
+    meta: { title: 'classStatude.class', icon: 'documentation'},
+    children:[
+      {
+        path:"classmanagement",
+        component:()=>import('@/views/classRoom/classManagement/index'),
+        name:"classmanagement",
+        meta:{title:"classStatude.class",icon: 'dashboard', view_id: 'main-grade'}
+      },
+      {
+        path:"Classroommanagement",
+        component:()=>import('@/views/classRoom/ClassroomManagement/index'),
+        name:'Classroommanagement',
+        meta:{title:"classStatude.classRoom",icon: 'dashboard', view_id: 'main-room'}
+      },
+      {
+        path:"studentManagement",
+        component:()=>import('@/views/classRoom/studentManagement/index'),
+        name:'studentManagement',
+        meta:{title:"classStatude.statude",icon: 'dashboard', view_id: 'main-student'}
+      }
+    ]
+  },
   {
     path: '/exs',
     component: Layout,
@@ -575,7 +560,7 @@ export const authorityRoutes=[
         path: 'add',
         component: () => import('@/views/exs/add'),
         name: 'Add',
-        meta: { title: 'add',icon: 'guide',view_id: "main-addUser"}
+        meta: { title: 'adds',icon: 'guide',view_id: "main-addUser"}
       },
       {
         path: 'exhibition',

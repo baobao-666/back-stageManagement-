@@ -1,4 +1,7 @@
 <template>
+<div>
+
+  
     <el-container>
         <h2>班级管理</h2>
         <el-header>
@@ -58,10 +61,13 @@
                 <!-- 分页 -->
         </el-main> 
     </el-container>
+    </div>
 </template>
 
 <script>
 import { mapState, mapActions, mapMutations } from 'vuex'
+import XLSX from 'xlsx';
+
 
 export default {
     data(){
@@ -71,7 +77,8 @@ export default {
              subject:""
             },
             input:"",
-            AllPage:[10, 20, 30, 40]
+            AllPage:[10, 20, 30, 40],
+            data:[]
         }
     },
     computed:{
@@ -109,7 +116,8 @@ export default {
           this.ruleForm.classroom=""
           this.ruleForm.subject=""
           this.input=""
-        }
+        },
+     
 
     },
     created(){
