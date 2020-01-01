@@ -27,6 +27,7 @@
 <script>
 import ImageCropper from '@/components/ImageCropper'
 import PanThumb from '@/components/PanThumb'
+import { mapActions, mapMutations } from 'vuex'
 
 export default {
   name: 'AvatarUploadDemo',
@@ -39,10 +40,19 @@ export default {
     }
   },
   methods: {
+    ...mapActions({
+      UpdateTheAvatar:"userPermission/UpdateTheAvatar"
+    }),
+    ...mapMutations({
+      SET_AVATAR:"user/SET_AVATAR"
+    })
+    ,
     cropSuccess(resData) {
       this.imagecropperShow = false
       this.imagecropperKey = this.imagecropperKey + 1
-      this.image = resData[0].path
+      this.image = resData[0].path 
+      this.SET_AVATAR(resData[0].path)
+      
     },
     close() {
       this.imagecropperShow = false

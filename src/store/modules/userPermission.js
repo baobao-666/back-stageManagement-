@@ -1,5 +1,5 @@
 // 用户权限接口文档
-import { getList, getidentity, getviews, getapi, getidentity_api, getidentity_view } from '@/api/userList'
+import { getList, getidentity, getviews, getapi, getidentity_api, getidentity_view , UpdateTheAvatar } from '@/api/userList'
 
 const state = {
   userList: [],//原展示用户数据

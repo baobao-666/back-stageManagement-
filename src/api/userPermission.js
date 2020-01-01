@@ -33,5 +33,3 @@ export const getIdUserView = () => request.get('/user/new')
 
 
 
-
-

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+</head>
+<body>
+    <input type="file" name="file" id="">
+<script>
+
+let ele=document.querySelector("input");
+
+ele.onchange=e=>{
+    console.log("e...",e);
+    let files = e.target.files;
+    console.log("files...",files)
+
+    let from =new FormData()
+    console.log("...form1",from)
+    
+    for (let i=0;i<files.length;i++ ){
+        console.log(files[i].name)
+        from.append(files[i].name,files[i])
+    }
+    
+    axios({
+        method:'post',
+        url:"http://123.206.55.50:11000/upload",
+        data:from,
+        onUploadProgress:function (e){
+            console.log("....e",(e.loaded*100/e.total).toFixed(2)+'%')
+        }
+    }).then(res=>{
+        console.log("成功",res)
+    }).catch(res=>{
+        console.log("失败",res)
+    })
+
+
+}
+
+
+</script>
+
+</body>
+</html>

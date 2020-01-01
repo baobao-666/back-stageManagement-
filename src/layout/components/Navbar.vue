@@ -44,12 +44,20 @@
           <a target="_blank" href="https://panjiachen.github.io/vue-element-admin-site/#/">
             <el-dropdown-item>Docs</el-dropdown-item>
           </a>
+          <div @click="Flags=true" >
+               <el-dropdown-item>上传头像</el-dropdown-item>
+          </div>
+          
           <el-dropdown-item divided>
             <span style="display:block;" @click="logout">{{ $t('navbar.logOut') }}</span>
           </el-dropdown-item>
         </el-dropdown-menu>
       </el-dropdown>
     </div>
+    <el-dialog  :visible.sync="Flags"   >
+        <AlertUpdate  />
+    </el-dialog>
+    
   </div>
 </template>
 
@@ -62,8 +70,13 @@ import Screenfull from '@/components/Screenfull'
 import SizeSelect from '@/components/SizeSelect'
 import LangSelect from '@/components/LangSelect'
 import Search from '@/components/HeaderSearch'
-
+import AlertUpdate from '@/views/components-demo/avatar-upload'
 export default {
+  data(){
+    return{
+      Flags:false
+    }
+  },
   components: {
     Breadcrumb,
     Hamburger,
@@ -71,7 +84,8 @@ export default {
     Screenfull,
     SizeSelect,
     LangSelect,
-    Search
+    Search,
+    AlertUpdate
   },
   computed: {
     ...mapGetters([
