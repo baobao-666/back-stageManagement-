@@ -48,15 +48,15 @@ const actions = {
    
 
       let userInfo = await getInfo();
-           console.log('userInfo===============================');
-           console.log(userInfo);
-           console.log('====================================');
+          //  console.log('userInfo===============================');
+          //  console.log(userInfo);
+          //  console.log('====================================');
       commit('SET_NAME', userInfo.data.user_name)
       commit('SET_AVATAR', userInfo.data.avatar || 'https://jasonandjay.com/favicon.ico')
 
       let viewAuthority = await getViewAuthority();
       
-      console.log('ViewAuthority...',viewAuthority);
+      // console.log('ViewAuthority...',viewAuthority);
       
       commit('SET_VIEWAUTHORITY',viewAuthority.data)
       return viewAuthority.data

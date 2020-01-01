@@ -34,7 +34,9 @@
         <div class="zdm">
           <div class="header">
             <div class="leftList">试卷列表</div>
+
             <div class="rightList">
+              <el-button @click="exportEXcel">导出Excel</el-button>
               <el-button class="line">全部</el-button>
               <el-button class="line">进行中</el-button>
               <el-button class="line">已结束</el-button>
@@ -55,13 +57,13 @@
               </template>
             </el-table-column>
           </el-table>
-
         </div>
       </el-main>
     </el-container>
   </div>
 </template>
 <script>
+import XLSX from "xlsx";
 import { mapState, mapMutations, mapActions } from "vuex";
 export default {
   data() {
@@ -82,29 +84,43 @@ export default {
       paperList: state => state.ExaminationPaperManagement.paperList
     })
   },
-  watch:{
-    paperList(now){
-      this.tableData = now.exam.map(item=>{
+  watch: {
+    paperList(now) {
+      this.tableData = now.exam.map(item => {
         return {
-          title:item.title,
-          grade_name:item.grade_name,
-          user_name:item.user_name,
-          start_time:item.start_time,
-          end_time:item.end_time,
-          exam_exam_id:item.exam_exam_id
-        }
-      })
+          title: item.title,
+          grade_name: item.grade_name,
+          user_name: item.user_name,
+          start_time: item.start_time,
+          end_time: item.end_time,
+          exam_exam_id: item.exam_exam_id
+        };
+      });
     }
   },
   methods: {
     ...mapActions({
       getexamType: "ExaminationPaperManagement/getexamType",
       getSubject: "ExaminationPaperManagement/getSubject",
-      getExaminationPaperManagement:"ExaminationPaperManagement/getExaminationPaperManagement"
+      getExaminationPaperManagement:
+        "ExaminationPaperManagement/getExaminationPaperManagement"
     }),
-      handleEdit(index, row) {
-      this.$router.push(`/detail?id=${row.exam_exam_id}`)
-    }, 
+    handleEdit(index, row) {
+      this.$router.push(`/detail?id=${row.exam_exam_id}`);
+    },
+    exportEXcel() {
+      var wb = XLSX.utils.book_new();
+      // console.log(this.tableData, "keys...", Object.keys(this.tableData[0]));
+      var ws = XLSX.utils.json_to_sheet(this.tableData, {header: Object.keys(this.tableData[0])});
+      // XLSX.utils.book_append_sheet(wb,ws,'student1')
+      // XLSX.utils.book_append_sheet(wb,ws,'student2')
+      // XLSX.utils.book_append_sheet(wb,ws,'student2')
+      XLSX.utils.book_append_sheet(wb, ws, "student1");
+      XLSX.utils.book_append_sheet(wb, ws, "student2");
+      XLSX.utils.book_append_sheet(wb, ws, "student3");
+      // 生成excel
+      XLSX.writeFile(wb, "");
+    }
   },
   created() {
     this.getExaminationPaperManagement();

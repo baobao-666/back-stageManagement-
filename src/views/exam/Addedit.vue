@@ -24,12 +24,13 @@
     <div v-show="HiddenBox" class="box">
          <p>study hard and make progress every day</p>
          <p>study hard and make progress every day</p>
+       
     </div>
   </el-container>
 </template>
 <script>
 import { mapState, mapActions, mapMutations } from "vuex";
-
+import Popout from '@/components/Popout/index'
 export default {
   data() {
     return {
